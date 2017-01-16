@@ -5,11 +5,33 @@ package p_virus body is
 
 --------------- Creation et Affichage de la grille
 
-procedure CreeVectVirus (f : in out file_type; nb : in integer; V :out TV_Virus);
+procedure CreeVectVirus (f : in out file_type; nb : in integer; V :out TV_Virus) is
 -- {f (ouvert) contient des configurations initiales,
 -- toutes les configurations se terminent par la position du virus rouge}
 -- => {V a ete initialise par lecture dans f de la partie de numero nb}
+   
+   
+   
+begin
+   
+   Reset(F, In_file);
+   for K in 1..Nb loop
+      Read(F, Val);
+      while Val.couleur /= Rouge loop
+	 Read(F,Val);
+	 V(Val.T_Lig, Val.T_Col) := Val.Couleur;
+      end loop;
+      while Val.Couleur = Rouge loop
+	 Read(F,Val);
+	 V(Val.T_Lig, Val.T_Col) := Rouge;
+      end loop;
+   end loop;
+   
+   
+   
+end CreeVectVirus;
 
+   
 procedure AfficheVectVirus (V : in TV_Virus);
 -- {} => {Les valeurs du vecteur V sont affichees sur une ligne}
 
