@@ -9,18 +9,50 @@ procedure CreeVectVirus (f : in out file_type; nb : in integer; V :out TV_Virus)
 -- {f (ouvert) contient des configurations initiales,
 -- toutes les configurations se terminent par la position du virus rouge}
 -- => {V a ete initialise par lecture dans f de la partie de numero nb}
+	Val : TR_Piece;
+	i : integer := T_Lig'first;
 begin
+	Reset(F, In_file);
 
+	-- On vide le vecteur
+	for k in T_Lig'range loop
+		for j in T_Col'range loop
+			V(k,j) := vide;
+		end loop;
+	end loop;
+	
+	
+	-- On parcours le fichier tant que l'on est pas à la bonne partie
+	Read(F,Val);
+	while i < nb loop	
+		while Val.couleur /= Rouge and not end_of_file(f) loop
+			Read(F,Val);
+		end loop;
+		while Val.Couleur = Rouge and not end_of_file(f) loop
+		 	Read(F,Val);
+		end loop;
+		i := i + 1;
+	end loop;
+
+	-- On parcours notre partie en ajoutant les pièces au vecteur
+	while Val.couleur /= Rouge and not end_of_file(f) loop
+		V(Val.ligne, Val.colonne) := Val.Couleur;	 		
+		Read(F,Val);
+	end loop;
+	while Val.Couleur = Rouge and not end_of_file(f) loop	 
+		V(Val.ligne, Val.colonne) := rouge;		
+		Read(F,Val);
+	end loop;
 end CreeVectVirus;
 
+   
 procedure AfficheVectVirus (V : in TV_Virus) is
 -- {} => {Les valeurs du vecteur V sont affichees sur une ligne}
-	i : T_Lig;
-	j : T_Col;
 begin
 	for i in T_Lig'range loop
 		for j in T_Col'range loop
-			Ecrire(V(i,j));
+			Ecrire(T_Piece'image(V(i,j)));
+			Ecrire(" ");
 		end loop;
 	end loop;	
 end AfficheVectVirus;
@@ -33,7 +65,33 @@ procedure AfficheGrille (V : in TV_Virus) is
 --			le caractere 'B' = piece blanche fixe
 -- 			rien = pas une case}
 begin
-	Ecrire("...");
+	--1ère ligne
+	Ecrire("\  ");
+	for i in T_Col'range loop
+		Ecrire(i); Ecrire(" ");
+	end loop;
+	A_la_ligne;
+
+	--2ème ligne
+	Ecrire(" \ ");
+	for i in 1..14 loop
+		Ecrire("=");
+	end loop;
+	A_la_ligne;
+
+	--Reste des lignes
+	for i in T_Lig'range loop
+		Ecrire(i); Ecrire("|");
+		for k in T_Col'range loop
+			if i mod 2 = 1 and k'val mod 2 = 1 then
+				if V(i,k) = vide then Ecrire(". ");
+				
+				else Ecrire("  ");
+			end if;
+		end loop;
+		A_la_ligne;
+	end loop;
+
 end AfficheGrille;
 --------------- Fonctions et procedures pour le jeu
 
