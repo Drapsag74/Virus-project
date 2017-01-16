@@ -33,7 +33,7 @@ procedure AfficheGrille (V : in TV_Virus) is
 --			le caractere 'B' = piece blanche fixe
 -- 			rien = pas une case}
 begin
-	E
+	Ecrire("...");
 end AfficheGrille;
 --------------- Fonctions et procedures pour le jeu
 
