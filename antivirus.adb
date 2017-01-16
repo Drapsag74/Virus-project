@@ -16,4 +16,7 @@ begin
 
 	AfficheGrille(V);
 	
+	Deplacement(V, violet, hg);
+
+	AfficheGrille(V);
 end antivirus;

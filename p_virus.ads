@@ -23,7 +23,10 @@ package p_virus is
 
 	---- type pour la direction des deplacements des pieces
 	type T_Direction is (bg, hg, bd, hd);
-	package p_Direction_IO is new p_enum(T_Direction); 
+	package p_Direction_IO is new p_enum(T_Direction);
+
+	---- type pour le vecteur contenant les cases d'une pièce 
+	type TV_Piece is array(integer range <>) of TR_Piece;
 
 --------------- Creation et Affichage de la grille
 
