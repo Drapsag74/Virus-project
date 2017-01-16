@@ -135,15 +135,56 @@ end Gueri;
 
 function Presente (V : in TV_Virus; Coul : in T_Piece) return Boolean is
 -- {} => {resultat =  la piece de couleur Coul appartient a V}
+	presente : boolean := false;
+
 begin
-	return false;
+      
+   for K of V loop
+      if K = Coul then presente := True; 
+		end if;
+   end loop;
+   
+   return presente;
+   
 end Presente;
 
 function Possible (V : in TV_Virus; Coul : in T_Piece; Dir : in T_Direction)return Boolean is
 -- {P appartient a la grille V} => {resultat = vrai si la piece de couleur Coul peut etre 
---                                             deplacee dans la direction Dir}
+-- deplacee dans la direction Dir}
+   
+   Possible : Boolean := true ;
+	i : Integer :=0;	
+	ligne : Integer := T_lig'first;
+	colonne : character := T_col'first;
+
 begin
-	return false;
+   
+		while ligne <= T_Lig'Last and possible loop
+			colonne := T_col'first;
+	 		while colonne <= T_Col'last and possible loop
+				-- On teste chaque case de la couleur
+	    		if V(ligne,colonne) = Coul then
+	       		if Dir = bg then
+						-- Possible := le case ou aura lieu le déplacement est dedans et soit vide soit de même couleur
+		  				possible := (ligne + 1 in T_lig'range and character'val(character'pos(colonne) - 1) in T_col'range) and then (V(ligne + 1, character'val(character'pos(colonne) - 1)) = Vide or V(ligne + 1, character'val(character'pos(colonne) - 1)) = Coul);
+	   	 		elsif Dir = hg then
+						-- Possible := le case ou aura lieu le déplacement est dedans et soit vide soit de même couleur
+	       		  	possible := (ligne - 1 in T_lig'range and character'val(character'pos(colonne) - 1) in T_col'range) and then (V(ligne - 1, character'val(character'pos(colonne) - 1)) = Vide or V(ligne - 1, character'val(character'pos(colonne) - 1)) = Coul);
+	    			elsif Dir = bd then
+						-- Possible := le case ou aura lieu le déplacement est dedans et soit vide soit de même couleur		  				
+						possible := (ligne + 1 in T_lig'range and character'val(character'pos(colonne) + 1) in T_col'range) and then (V(ligne + 1, character'val(character'pos(colonne) + 1)) = Vide or V(ligne + 1, character'val(character'pos(colonne) + 1)) = Coul);	    						
+					else --Dir = hd
+						-- Possible := le case ou aura lieu le déplacement est dedans et soit vide soit de même couleur
+	       		  	possible := (ligne - 1 in T_lig'range and character'val(character'pos(colonne) + 1) in T_col'range) and then (V(ligne - 1, character'val(character'pos(colonne) + 1)) = Vide or V(ligne - 1, character'val(character'pos(colonne) + 1)) = Coul);
+					end if;	    		
+				end if;
+				colonne := character'val(character'pos(colonne) + 1);
+      	end loop;
+			ligne := ligne + 1;
+		end loop;
+
+   return Possible;
+   
 end Possible;
 
 function TaillePiece(V : in out TV_Virus; Coul : in T_Piece) return integer is
