@@ -4,6 +4,7 @@ with p_fenbase; use p_fenbase;
 with p_graphique; use p_graphique;
 use p_virus.p_Piece_IO;
 use p_virus.p_Direction_IO;
+with Forms; use Forms;
 
 
 procedure avgraphique is
@@ -15,9 +16,9 @@ procedure avgraphique is
 
 	f : file_type;
 	V : TV_Virus;
-	--direction : string(1..2);
-	--piece : integer;
-
+	direction : string(1..2);
+	piece : integer;
+	bouton : string(1..2);
 begin
 
 	InitialiserFenetres;
@@ -79,25 +80,36 @@ begin
 				MiseAJourGrille(fenetreJeu, V);
 
 				-- Jeu
-				while not Gueri(V) loop
-					Ecrire("Numéro de la piece :"); Lire(piece);
-					Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);
+				--while not Gueri(V) loop
+					--Ecrire("Numéro de la piece :"); Lire(piece);
+					--Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);
 
-					if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
-						Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
-						AfficheGrille(V);
-					else
-						Ecrire_ligne("Mouvement impossible");
-					end if;
+					--if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
+						--Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
+						--AfficheGrille(V);
+						--MiseAJourGrille(fenetreJeu, V);
+					--else
+						--Ecrire_ligne("Mouvement impossible");
+					--end if;
 
-					MiseAJourGrille(fenetreJeu, V);
-					AfficheGrille(V);
-				end loop;
+				--end loop;
 
-				loop
-					exit when AttendreBouton(fenetrejeu) = "A1";
-				end loop;
+					loop
+						bouton := AttendreBouton(fenetreJeu);
 
+						Ecrire("Numéro de la piece :"); Lire(piece);
+						Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);
+						
+						if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
+							Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
+							AfficheGrille(V);
+							MiseAJourGrille(fenetreJeu, V);
+						else
+							Ecrire_ligne("Mouvement impossible");
+						end if;
+
+						exit when bouton = "A1" ;
+					end loop;
 				CacherFenetre(fenetrejeu);
 
 		end if;

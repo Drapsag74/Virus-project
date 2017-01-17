@@ -210,6 +210,7 @@ procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) i
 	Colonne : character;
 begin
 	--Réinitialisation de toutes les cases
+	--CacherFenetre(fenetreJeu);
 	while ligne <= T_Lig'last loop
 		colonne := T_Col'first;
 
@@ -268,6 +269,7 @@ begin
 			end if;
 		end loop;
 	end loop;
+	--MontrerFenetre(fenetreJeu);
 
 end MiseAJourGrille;
 
