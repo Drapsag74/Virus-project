@@ -169,6 +169,7 @@ begin
 		ChangerTailleTexte(fenetreJeu, "titre en jeu", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJeu, "titre en jeu",FL_BOLD_STYLE);
 
+		--Création du plateau de jeu
 		y := 100;
 		while ligne <= T_Lig'last loop
 			colonne := T_Col'first;
@@ -200,6 +201,16 @@ begin
 			y := y + 100;
 			ligne := ligne + 1;
 		end loop;
+
+		--Création des boutons directionnels
+		AjouterBoutonImage(fenetreJeu, "hg", "", 0, 0, 50, 50);
+		ChangerImageBouton(fenetreJeu, "hg", "img/hg.png");
+		AjouterBoutonImage(fenetreJeu, "hd", "", 0, 0, 50, 50);
+		ChangerImageBouton(fenetreJeu, "hd", "img/hd.png");
+		AjouterBoutonImage(fenetreJeu, "bd", "", 0, 0, 50, 50);
+		ChangerImageBouton(fenetreJeu, "bd", "img/bd.png");
+		AjouterBoutonImage(fenetreJeu, "bg", "", 0, 0, 50, 50);
+		ChangerImageBouton(fenetreJeu, "bg", "img/bg.png");
 end CreerFenetreJeu;
 
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) is
