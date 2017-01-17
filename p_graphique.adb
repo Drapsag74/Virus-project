@@ -205,11 +205,11 @@ begin
 		--Création des boutons directionnels
 		AjouterBoutonImage(fenetreJeu, "hg", "", 0, 0, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hg", "img/hg.png");
-		AjouterBoutonImage(fenetreJeu, "hd", "", 0, 0, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "hd", "", 50, 0, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hd", "img/hd.png");
-		AjouterBoutonImage(fenetreJeu, "bd", "", 0, 0, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "bd", "", 50, 50, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bd", "img/bd.png");
-		AjouterBoutonImage(fenetreJeu, "bg", "", 0, 0, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "bg", "", 0, 50, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bg", "img/bg.png");
 end CreerFenetreJeu;
 
