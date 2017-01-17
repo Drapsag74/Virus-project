@@ -18,7 +18,7 @@ begin
 	Close(f);
 
 	AfficheGrille(V);
-	
+	affichevectvirus(V);
 	while not Gueri(V) loop
 		Ecrire("Numéro de la piece :"); Lire(piece);
 		Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);

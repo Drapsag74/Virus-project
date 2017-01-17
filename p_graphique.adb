@@ -183,7 +183,6 @@ begin
 					AjouterBouton(fenetreJeu, nomCase , "", x, y, 100, 100);
 					x := x + 200;
 					colonne := Character'val(Character'pos(colonne) + 2);
-					ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
 				end loop;
 	
 			-- Affichage des lignes impaires	
@@ -194,8 +193,7 @@ begin
 					nomCase := colonne & T_Lig'image(ligne)(2);
 					AjouterBouton(fenetreJeu, nomCase, "", x, y, 100, 100);
 					x := x + 200;
-					colonne := Character'val(Character'pos(colonne) + 2);
-					ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);	
+					colonne := Character'val(Character'pos(colonne) + 2);	
 				end loop;
 			end if;
 	
@@ -204,5 +202,73 @@ begin
 		end loop;
 end CreerFenetreJeu;
 
+procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) is
+--{} => {Met à jour l'affichage des cases de la grille}
+
+	nomCase : String(1..2);
+	ligne : Integer := T_Lig'first;
+	Colonne : character;
+begin
+	--Réinitialisation de toutes les cases
+	while ligne <= T_Lig'last loop
+		colonne := T_Col'first;
+
+		-- Réinitialisation des lignes paires
+		if ligne mod 2 = 0 then 
+			
+			colonne := Character'val(Character'pos(colonne) + 1);
+			while colonne < T_Col'last  loop
+				nomCase := colonne & T_Lig'image(ligne)(2);
+				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
+				
+				colonne := Character'val(Character'pos(colonne) + 2);
+			end loop;
+	
+		-- Réinitialisation des lignes impaires	
+		else 
+
+			while colonne <= T_Col'last loop
+				nomCase := colonne & T_Lig'image(ligne)(2);
+				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
+				
+				colonne := Character'val(Character'pos(colonne) + 2);
+			end loop;
+			
+		end if;
+
+		ligne := ligne + 1;
+	end loop;
+	
+	--Affichage des cases (i : ligne, j : colonne)
+	for i in T_Lig'range loop
+		for j in T_Col'range loop
+			if V(i,j) /= vide then
+				nomCase := j & T_Lig'image(i)(2);
+				if V(i,j) = rouge then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_RED);
+				elsif V(i,j) = turquoise then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKCYAN);
+				elsif V(i,j) = orange then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKORANGE);
+				elsif V(i,j) = rose then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_ORCHID);
+				elsif V(i,j) = marron then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKTOMATO);
+				elsif V(i,j) = bleu then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_CYAN);
+				elsif V(i,j) = violet then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKVIOLET);
+				elsif V(i,j) = vert then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_CHARTREUSE);
+				elsif V(i,j) = jaune then
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_YELLOW);
+				else -- case blanc
+					ChangerCouleurFond(fenetreJeu, nomCase, FL_WHITE);
+				end if;
+			end if;
+		end loop;
+	end loop;
+
+end MiseAJourGrille;
 
 end p_graphique;
