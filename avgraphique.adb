@@ -14,11 +14,13 @@ procedure avgraphique is
 	niveau : integer;
 	difficulte : T_Difficulte;
 
+	package p_PieceIO is new p_enum(T_Piece); use p_PieceIO;
+
 	f : file_type;
 	V : TV_Virus;
 	direction : string(1..2);
 	piece : integer;
-	bouton : string(1..2);
+	coordPiece : string(1..2);
 begin
 
 	InitialiserFenetres;
@@ -76,39 +78,28 @@ begin
 
 				-- Initialisation
 				MontrerFenetre(fenetreJeu);
-				AfficheGrille(V);
 				MiseAJourGrille(fenetreJeu, V);
 
 				-- Jeu
-				--while not Gueri(V) loop
-					--Ecrire("Numéro de la piece :"); Lire(piece);
-					--Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);
-
-					--if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
-						--Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
-						--AfficheGrille(V);
-						--MiseAJourGrille(fenetreJeu, V);
-					--else
-						--Ecrire_ligne("Mouvement impossible");
-					--end if;
-
-				--end loop;
 
 					loop
-						bouton := AttendreBouton(fenetreJeu);
+						--Eventuellement, désactiver le plateau lorsque choix direction et inversement
+						ChangerTexte(fenetreJeu, "informations", "Choisissez votre piece");					
+						coordPiece := AttendreBouton(fenetreJeu);
+						piece := T_Piece'pos(V(character'pos(coordPiece(2))-48,coordPiece(1))); -- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). I et J sont extrait du nom du bouton. Le numéro de ligne es départ un chiffre sous forme de charactère. integer'image(i) ne fonctionne pas car i est un est un charcter et non un string ! Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
 
-						Ecrire("Numéro de la piece :"); Lire(piece);
-						Ecrire("Direction (bg/hg/bd/hd) : "); Lire(direction);
+						ChangerTexte(fenetreJeu, "informations", "Choisissez votre direction");	
+						direction := AttendreBouton(fenetreJeu);
 						
 						if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
 							Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
-							AfficheGrille(V);
+
 							MiseAJourGrille(fenetreJeu, V);
 						else
-							Ecrire_ligne("Mouvement impossible");
+							ChangerTexte(fenetreJeu, "informations", "Mouvement impossible");	-- Non visible
 						end if;
 
-						exit when bouton = "A1" ;
+						exit when coordPiece = "A8" or Gueri(V); --faire une vraie sortie
 					end loop;
 				CacherFenetre(fenetrejeu);
 

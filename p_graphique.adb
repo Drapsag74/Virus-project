@@ -163,6 +163,12 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 begin
 
 	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 1000);
+
+		--Background
+		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 1000);
+		ChangerImageBouton(fenetreJeu, "background", "img/background.xpm");
+		ChangerEtatBouton(fenetreJeu, "background", arret);
+
 		--Titre et style titre
 		AjouterTexte(fenetreJeu, "titre en jeu", "ANTI-VIRUS",425,25,200,50);
 		ChangerCouleurTexte(fenetreJeu,"titre en jeu", FL_TOMATO);
@@ -204,13 +210,16 @@ begin
 
 		--Création des boutons directionnels
 		AjouterBoutonImage(fenetreJeu, "hg", "", 0, 0, 50, 50);
-		ChangerImageBouton(fenetreJeu, "hg", "img/hg.png");
+		ChangerImageBouton(fenetreJeu, "hg", "img/hg.xpm");
 		AjouterBoutonImage(fenetreJeu, "hd", "", 50, 0, 50, 50);
-		ChangerImageBouton(fenetreJeu, "hd", "img/hd.png");
+		ChangerImageBouton(fenetreJeu, "hd", "img/hd.xpm");
 		AjouterBoutonImage(fenetreJeu, "bd", "", 50, 50, 50, 50);
-		ChangerImageBouton(fenetreJeu, "bd", "img/bd.png");
+		ChangerImageBouton(fenetreJeu, "bd", "img/bd.xpm");
 		AjouterBoutonImage(fenetreJeu, "bg", "", 0, 50, 50, 50);
-		ChangerImageBouton(fenetreJeu, "bg", "img/bg.png");
+		ChangerImageBouton(fenetreJeu, "bg", "img/bg.xpm");
+
+		--Création de la zone de texte informative
+		AjouterTexte(fenetreJeu, "informations", "Initialisation ...", 0, 150, 150, 25);
 end CreerFenetreJeu;
 
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) is
