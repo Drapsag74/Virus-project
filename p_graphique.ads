@@ -2,6 +2,7 @@ with p_esiut; use p_esiut;
 with p_virus; use p_virus;
 with p_fenbase; use p_fenbase;
 with Forms; use Forms;
+
 package p_graphique is
 
 type T_Difficulte is (starter, junior, expert, master, wizard);
@@ -29,5 +30,8 @@ procedure CreerFenetreWizard(fenetreWizard : out TR_Fenetre);
 
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre);
 --{} => {Affichage du plateau de jeu}
+
+procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);
+--{} => {Met à jour l'affichage des cases de la grille}
 
 end p_graphique;

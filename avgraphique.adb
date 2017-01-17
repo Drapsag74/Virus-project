@@ -5,6 +5,7 @@ with p_graphique; use p_graphique;
 use p_virus.p_Piece_IO;
 use p_virus.p_Direction_IO;
 
+
 procedure avgraphique is
 --{} => {Affichage graphique du jeu}
 	
@@ -13,9 +14,8 @@ procedure avgraphique is
 	difficulte : T_Difficulte;
 	
 	f : file_type;
-	--nb : integer;
 	V : TV_Virus;
-	direction : string(1..2) := "ab";
+	--direction : string(1..2);
 	--piece : integer;
 	
 begin
@@ -74,7 +74,8 @@ begin
 				Close(f);
 		
 				MontrerFenetre(fenetreJeu);
-				--AfficheGrille(V);
+				MiseAJourGrille(fenetreJeu, V);
+				
 				
 				--while not Gueri(V) loop
 					--Ecrire("Numéro de la piece :"); Lire(piece);
