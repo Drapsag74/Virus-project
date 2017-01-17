@@ -31,11 +31,11 @@ procedure CreerFenetreDifficulte(FenetreDifficulte : out TR_Fenetre) is
 
 begin
 		fenetreDifficulte := DebutFenetre("Anti-Virus : Choix difficulte", 500, 500);
-			-- Titre			
+			-- Titre
 			Ajoutertexte(fenetreDifficulte, "titreDifficulte", "Choix difficulte",125,50,300,100);
 			ChangerCouleurTexte(fenetreDifficulte,"titreDifficulte", FL_TOMATO);
 			ChangerTailleTexte(fenetreDifficulte, "titreDifficulte", FL_LARGE_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "titreDifficulte",FL_FIXEDBOLDITALIC_STYLE);			
+			ChangerStyleTexte(fenetreDifficulte, "titreDifficulte",FL_FIXEDBOLDITALIC_STYLE);
 			-- Boutons
 			AjouterBouton(fenetreDifficulte,"starter","Starter",200,150,100,50);
 			ChangerCouleurTexte(fenetreDifficulte,"starter", FL_CHARTREUSE);
@@ -74,7 +74,7 @@ begin
 		ChangerCouleurTexte(fenetreStarter,"titreStarter", FL_TOMATO);
 		ChangerTailleTexte(fenetreStarter, "titreStarter", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreStarter, "titreStarter",FL_BOLD_STYLE);
-		--bouton de choix de niveau	
+		--bouton de choix de niveau
 		AjouterBouton(fenetreStarter, "1", "Niveau 1", 100 ,200,200,200);
 		AjouterBouton(fenetreStarter, "2", "Niveau 2", 400,200,200,200);
 		AjouterBouton(fenetreStarter, "3", "Niveau 3", 700,200,200,200);
@@ -93,7 +93,7 @@ begin
 		ChangerCouleurTexte(fenetreJunior,"titreJunior", FL_TOMATO);
 		ChangerTailleTexte(fenetreJunior, "titreJunior", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJunior, "titreJunior",FL_BOLD_STYLE);
-		--bouton de choix de niveau	
+		--bouton de choix de niveau
 		AjouterBouton(fenetreJunior, "6", "Niveau 6", 100 ,200,200,200);
 		AjouterBouton(fenetreJunior, "7", "Niveau 7", 400,200,200,200);
 		AjouterBouton(fenetreJunior, "8", "Niveau 8", 700,200,200,200);
@@ -112,7 +112,7 @@ begin
 		ChangerCouleurTexte(fenetreExpert,"titreExpert", FL_TOMATO);
 		ChangerTailleTexte(fenetreExpert, "titreExpert", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreExpert, "titreExpert",FL_BOLD_STYLE);
-		--bouton de choix de niveau	
+		--bouton de choix de niveau
 		AjouterBouton(fenetreExpert, "11", "Niveau 11", 100,200,200,200);
 		AjouterBouton(fenetreExpert, "12", "Niveau 12", 400,200,200,200);
 		AjouterBouton(fenetreExpert, "13", "Niveau 13", 700,200,200,200);
@@ -151,7 +151,7 @@ begin
 		-- bouton de choix de niveau
 		AjouterBouton(fenetreWizard, "19", "Niveau 19",250 ,250,200,200);
 		AjouterBouton(fenetreWizard, "20", "Niveau 20", 550,250,200,200);
-	FinFenetre(fenetreWizard);  
+	FinFenetre(fenetreWizard);
 end CreerFenetreWizard;
 
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
@@ -161,20 +161,20 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 	x, y : integer;
 	nomCase : String(1..2);
 begin
-	
-	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 800);
+
+	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 1000);
 		--Titre et style titre
 		AjouterTexte(fenetreJeu, "titre en jeu", "ANTI-VIRUS",425,25,200,50);
 		ChangerCouleurTexte(fenetreJeu,"titre en jeu", FL_TOMATO);
 		ChangerTailleTexte(fenetreJeu, "titre en jeu", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJeu, "titre en jeu",FL_BOLD_STYLE);
-		
+
 		y := 100;
 		while ligne <= T_Lig'last loop
 			colonne := T_Col'first;
 
 			-- Affichage des lignes paires
-			if ligne mod 2 = 0 then 
+			if ligne mod 2 = 0 then
 				x := 250;
 				colonne := Character'val(Character'pos(colonne) + 1);
 
@@ -184,19 +184,19 @@ begin
 					x := x + 200;
 					colonne := Character'val(Character'pos(colonne) + 2);
 				end loop;
-	
-			-- Affichage des lignes impaires	
-			else 
-				x := 150; 
-				
+
+			-- Affichage des lignes impaires
+			else
+				x := 150;
+
 				while colonne <= T_Col'last loop
 					nomCase := colonne & T_Lig'image(ligne)(2);
 					AjouterBouton(fenetreJeu, nomCase, "", x, y, 100, 100);
 					x := x + 200;
-					colonne := Character'val(Character'pos(colonne) + 2);	
+					colonne := Character'val(Character'pos(colonne) + 2);
 				end loop;
 			end if;
-	
+
 			y := y + 100;
 			ligne := ligne + 1;
 		end loop;
@@ -209,37 +209,37 @@ procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) i
 	ligne : Integer := T_Lig'first;
 	Colonne : character;
 begin
+
 	--Réinitialisation de toutes les cases
-	--CacherFenetre(fenetreJeu);
 	while ligne <= T_Lig'last loop
 		colonne := T_Col'first;
 
 		-- Réinitialisation des lignes paires
-		if ligne mod 2 = 0 then 
-			
+		if ligne mod 2 = 0 then
+
 			colonne := Character'val(Character'pos(colonne) + 1);
 			while colonne < T_Col'last  loop
 				nomCase := colonne & T_Lig'image(ligne)(2);
 				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
-				
+
 				colonne := Character'val(Character'pos(colonne) + 2);
 			end loop;
-	
-		-- Réinitialisation des lignes impaires	
-		else 
+
+		-- Réinitialisation des lignes impaires
+		else
 
 			while colonne <= T_Col'last loop
 				nomCase := colonne & T_Lig'image(ligne)(2);
 				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
-				
+
 				colonne := Character'val(Character'pos(colonne) + 2);
 			end loop;
-			
+
 		end if;
 
 		ligne := ligne + 1;
 	end loop;
-	
+
 	--Affichage des cases (i : ligne, j : colonne)
 	for i in T_Lig'range loop
 		for j in T_Col'range loop
@@ -269,7 +269,6 @@ begin
 			end if;
 		end loop;
 	end loop;
-	--MontrerFenetre(fenetreJeu);
 
 end MiseAJourGrille;
 
