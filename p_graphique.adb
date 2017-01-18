@@ -81,11 +81,16 @@ begin
 		ChangerTailleTexte(fenetreStarter, "titreStarter", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreStarter, "titreStarter",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBouton(fenetreStarter, "1", "Niveau 1", 100 ,200,200,200);
-		AjouterBouton(fenetreStarter, "2", "Niveau 2", 400,200,200,200);
-		AjouterBouton(fenetreStarter, "3", "Niveau 3", 700,200,200,200);
-		AjouterBouton(fenetreStarter, "4", "Niveau 4", 250,450,200,200);
-		AjouterBouton(fenetreStarter, "5", "Niveau 5", 550,450,200,200);
+		AjouterBoutonImage(fenetreStarter, "1", "Niveau 1", 100 ,200,200,200);
+		ChangerImageBouton(fenetreStarter, "1", "img/niveaux/niveau1.xpm");
+		AjouterBoutonImage(fenetreStarter, "2", "Niveau 2", 400,200,200,200);
+		ChangerImageBouton(fenetreStarter, "2", "img/niveaux/niveau2.xpm");
+		AjouterBoutonImage(fenetreStarter, "3", "Niveau 3", 700,200,200,200);
+		ChangerImageBouton(fenetreStarter, "3", "img/niveaux/niveau3.xpm");
+		AjouterBoutonImage(fenetreStarter, "4", "Niveau 4", 250,450,200,200);
+		ChangerImageBouton(fenetreStarter, "4", "img/niveaux/niveau4.xpm");
+		AjouterBoutonImage(fenetreStarter, "5", "Niveau 5", 550,450,200,200);
+		ChangerImageBouton(fenetreStarter, "5", "img/niveaux/niveau5.xpm");
 	FinFenetre(fenetreStarter);
 end CreerFenetreStarter;
 
@@ -100,11 +105,16 @@ begin
 		ChangerTailleTexte(fenetreJunior, "titreJunior", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJunior, "titreJunior",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBouton(fenetreJunior, "6", "Niveau 6", 100 ,200,200,200);
-		AjouterBouton(fenetreJunior, "7", "Niveau 7", 400,200,200,200);
-		AjouterBouton(fenetreJunior, "8", "Niveau 8", 700,200,200,200);
-		AjouterBouton(fenetreJunior, "9", "Niveau 9", 250,450,200,200);
-		AjouterBouton(fenetreJunior, "10", "Niveau 10", 550,450,200,200);
+		AjouterBoutonImage(fenetreJunior, "6", "Niveau 6", 100 ,200,200,200);
+		ChangerImageBouton(fenetreJunior, "6", "img/niveaux/niveau6.xpm");
+		AjouterBoutonImage(fenetreJunior, "7", "Niveau 7", 400,200,200,200);
+		ChangerImageBouton(fenetreJunior, "7", "img/niveaux/niveau7.xpm");
+		AjouterBoutonImage(fenetreJunior, "8", "Niveau 8", 700,200,200,200);
+		ChangerImageBouton(fenetreJunior, "8", "img/niveaux/niveau8.xpm");
+		AjouterBoutonImage(fenetreJunior, "9", "Niveau 9", 250,450,200,200);
+		ChangerImageBouton(fenetreJunior, "9", "img/niveaux/niveau9.xpm");
+		AjouterBoutonImage(fenetreJunior, "10", "Niveau 10", 550,450,200,200);
+		ChangerImageBouton(fenetreJunior, "10", "img/niveaux/niveau10.xpm");
 	FinFenetre(fenetreJunior);
 end CreerFenetreJunior;
 
@@ -119,11 +129,16 @@ begin
 		ChangerTailleTexte(fenetreExpert, "titreExpert", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreExpert, "titreExpert",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBouton(fenetreExpert, "11", "Niveau 11", 100,200,200,200);
-		AjouterBouton(fenetreExpert, "12", "Niveau 12", 400,200,200,200);
-		AjouterBouton(fenetreExpert, "13", "Niveau 13", 700,200,200,200);
-		AjouterBouton(fenetreExpert, "14", "Niveau 14", 250,450,200,200);
-		AjouterBouton(fenetreExpert, "15", "Niveau 15", 550,450,200,200);
+		AjouterBoutonImage(fenetreExpert, "11", "Niveau 11", 100,200,200,200);
+		ChangerImageBouton(fenetreExpert, "11", "img/niveaux/niveau11.xpm");
+		AjouterBoutonImage(fenetreExpert, "12", "Niveau 12", 400,200,200,200);
+		ChangerImageBouton(fenetreExpert, "12", "img/niveaux/niveau12.xpm");
+		AjouterBoutonImage(fenetreExpert, "13", "Niveau 13", 700,200,200,200);
+		ChangerImageBouton(fenetreExpert, "13", "img/niveaux/niveau13.xpm");
+		AjouterBoutonImage(fenetreExpert, "14", "Niveau 14", 250,450,200,200);
+		ChangerImageBouton(fenetreExpert, "14", "img/niveaux/niveau14.xpm");
+		AjouterBoutonImage(fenetreExpert, "15", "Niveau 15", 550,450,200,200);
+		ChangerImageBouton(fenetreExpert, "15", "img/niveaux/niveau15.xpm");
 	FinFenetre(fenetreExpert);
 end CreerFenetreExpert;
 
@@ -138,9 +153,12 @@ begin
 		ChangerTailleTexte(fenetreMaster, "titreMaster", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreMaster, "titreMaster",FL_BOLD_STYLE);
 		-- bouton de choix de niveau
-		AjouterBouton(fenetreMaster, "16", "Niveau 16", 250,200,200,200);
-		AjouterBouton(fenetreMaster, "17", "Niveau 17", 550,200,200,200);
-		AjouterBouton(fenetreMaster, "18", "Niveau 18", 400,450,200,200);
+		AjouterBoutonImage(fenetreMaster, "16", "Niveau 16", 250,200,200,200);
+		ChangerImageBouton(fenetreMaster, "16", "img/niveaux/niveau16.xpm");
+		AjouterBoutonImage(fenetreMaster, "17", "Niveau 17", 550,200,200,200);
+		ChangerImageBouton(fenetreMaster, "17", "img/niveaux/niveau17.xpm");
+		AjouterBoutonImage(fenetreMaster, "18", "Niveau 18", 400,450,200,200);
+		ChangerImageBouton(fenetreMaster, "18", "img/niveaux/niveau18.xpm");
 	FinFenetre(fenetreMaster);
 end CreerFenetreMaster;
 
@@ -155,8 +173,10 @@ begin
 		ChangerTailleTexte(fenetreWizard, "titreWizard", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreWizard, "titreWizard",FL_BOLD_STYLE);
 		-- bouton de choix de niveau
-		AjouterBouton(fenetreWizard, "19", "Niveau 19",250 ,250,200,200);
-		AjouterBouton(fenetreWizard, "20", "Niveau 20", 550,250,200,200);
+		AjouterBoutonImage(fenetreWizard, "19", "Niveau 19",250 ,250,200,200);
+		ChangerImageBouton(fenetreWizard, "19", "img/niveaux/niveau19.xpm");
+		AjouterBoutonImage(fenetreWizard, "20", "Niveau 20", 550,250,200,200);
+		ChangerImageBouton(fenetreWizard, "20", "img/niveaux/niveau20.xpm");
 	FinFenetre(fenetreWizard);
 end CreerFenetreWizard;
 
