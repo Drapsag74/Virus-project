@@ -228,8 +228,11 @@ begin
 		AjouterTexte(fenetreJeu, "infoMouvement", "", 700, 375, 200, 25);
 		AjouterTexte(fenetreJeu, "infoAction", "", 700, 400, 200, 25);
 		
-		--Création des boutons quitter et fin
+		--Création du bouton quitter
 		AjouterBouton(fenetreJeu, "", "Quitter", 700, 450, 100, 25);
+
+		--Création du bouton règles
+		AjouterBouton(fenetreJeu, "", "Regles", 805, 450, 100, 25);
 
 end CreerFenetreJeu;
 
