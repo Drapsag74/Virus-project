@@ -10,7 +10,7 @@ with Forms; use Forms;
 procedure avgraphique is
 --{} => {Affichage graphique du jeu}
 
-	FenetreBienvenue, FenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu, FenetreGagne : TR_Fenetre;
+	FenetreBienvenue, fenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu, fenetreGagne, fenetreRegles: TR_Fenetre;
 	niveau : integer;
 	difficulte : T_Difficulte;
 
@@ -36,6 +36,7 @@ begin
 		CreerFenetreWizard(fenetreWizard);
 
 		CreerFenetreJeu(fenetreJeu);
+		--CreerFenetreRegles(fenetreRegles);
 
 	--Programme principal
 
@@ -84,11 +85,9 @@ begin
 				MiseAJourGrille(fenetreJeu, V);
 
 			-- Jeu
-			while not Gueri(V) loop
 
-				-- Initialisation du tour de jeu
-				ChangerTexte(fenetreJeu, "infoAction", "  Choisissez votre piece");
-				ChangerTexte(fenetreJeu, "infoMouvement", ""); 
+			ChangerTexte(fenetreJeu, "info1", "  Choisissez votre piece");
+			while not Gueri(V) loop
 
 				-- Attente d'un bouton
 				declare				
@@ -97,6 +96,9 @@ begin
 
 					if nomBouton = "quitter" then exit;
 
+					--elsif nomBouton = "regles" then
+						--Ecrire("...");
+
 					-- Si choix de direction ...
 					elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
 
@@ -104,19 +106,22 @@ begin
 						if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then					
 							Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
 							MiseAJourGrille(fenetreJeu, V);
+							ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
+							ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
 						else
-							ChangerTexte(fenetreJeu, "infoMouvement", "Mouvement impossible"); 
+							ChangerTexte(fenetreJeu, "info1", "  Mouvement impossible");
+							ChangerTexte(fenetreJeu, "info2", "Change de piece/direction");
 						end if;
 
 					else -- Sélection de la piece
-									
 						piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1))); 
 									-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
 									-- I et J sont extrait du nom du bouton. 
 									-- Le numéro de ligne est un chiffre sous forme de charactère. 
 									-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
 									-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
-						ChangerTexte(fenetreJeu, "infoAction", "Choisissez votre direction");	
+						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
+						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");		
 
 					end if;
 				end;
