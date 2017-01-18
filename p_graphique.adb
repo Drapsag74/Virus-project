@@ -181,15 +181,16 @@ begin
 end CreerFenetreWizard;
 
 
---procedure CreerFenetreRegles(FenetreJeu : out TR_Fenetre) is
+procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre) is
 --{} => {Affichage du plateau de jeu}
---begin
+begin
 
-	--fenetreRegles := DebutFenetre("Anti-Virus : Regles", 1000, 750);
-		--AjouterTexte(fenetreRegles, "titreRegle", "Regles", "0", "0");
-	--FinFenetre(fenetreRegles);
+	fenetreRegles := DebutFenetre("Anti-Virus : Regles", 1000, 750);
+		AjouterTexte(fenetreRegles, "titreRegle", "Regles", 0, 0, 100, 25);
+		AjouterBouton(fenetreRegles, "fermerRegles", "Fermer", 10, 10, 20, 20);
+	FinFenetre(fenetreRegles);
 		
---end CreerFenetreRegles;
+end CreerFenetreRegles;
 
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 --{} => {Affichage des règles}
@@ -199,7 +200,7 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 	nomCase : String(1..2);
 begin
 
-	fenetreRegles := DebutFenetre("Anti-Virus", 1000, 750);
+	fenetreJeu := DebutFenetre("Anti-Virus", 1000, 750);
 
 		--Background
 		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 800);

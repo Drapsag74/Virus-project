@@ -36,7 +36,7 @@ begin
 		CreerFenetreWizard(fenetreWizard);
 
 		CreerFenetreJeu(fenetreJeu);
-		--CreerFenetreRegles(fenetreRegles);
+		CreerFenetreRegles(fenetreRegles);
 
 	--Programme principal
 
@@ -96,8 +96,11 @@ begin
 
 					if nomBouton = "quitter" then exit;
 
-					--elsif nomBouton = "regles" then
-						--Ecrire("...");
+					elsif nomBouton = "regles" then
+						MontrerFenetre(fenetreRegles);
+						if AttendreBouton(fenetreRegles) = "fermerRegles" then
+							CacherFenetre(fenetreRegles);
+						end if;
 
 					-- Si choix de direction ...
 					elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
