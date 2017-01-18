@@ -34,4 +34,7 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre);
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);
 --{} => {Met à jour l'affichage des cases de la grille}
 
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer);
+--{} => {Créé la fenêtre d'un niveau réussis}
+
 end p_graphique;

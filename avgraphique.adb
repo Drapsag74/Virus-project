@@ -10,7 +10,7 @@ with Forms; use Forms;
 procedure avgraphique is
 --{} => {Affichage graphique du jeu}
 
-	FenetreBienvenue, FenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu : TR_Fenetre;
+	FenetreBienvenue, FenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu, FenetreGagne : TR_Fenetre;
 	niveau : integer;
 	difficulte : T_Difficulte;
 
@@ -84,29 +84,47 @@ begin
 
 					loop
 						--Eventuellement, désactiver le plateau lorsque choix direction et inversement
+
+
+						-- Sélection de la piece
 						ChangerTexte(fenetreJeu, "informations", "Choisissez votre piece");					
 						coordPiece := AttendreBouton(fenetreJeu);
-						piece := T_Piece'pos(V(character'pos(coordPiece(2))-48,coordPiece(1))); -- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). I et J sont extrait du nom du bouton. Le numéro de ligne es départ un chiffre sous forme de charactère. integer'image(i) ne fonctionne pas car i est un est un charcter et non un string ! Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
+						if coordPiece = "quitter" then exit; end if;
+						piece := T_Piece'pos(V(character'pos(coordPiece(2))-48,coordPiece(1))); 
+									-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
+									-- I et J sont extrait du nom du bouton. 
+									-- Le numéro de ligne est un chiffre sous forme de charactère. 
+									-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
+									-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
 
+
+						-- Sélection de la direction
 						ChangerTexte(fenetreJeu, "informations", "Choisissez votre direction");	
 						direction := AttendreBouton(fenetreJeu);
+						if coordPiece = "quitter" then exit; end if;
 						
+
+						-- Mouvement
 						if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
 							Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
 
 							MiseAJourGrille(fenetreJeu, V);
 						else
-							ChangerTexte(fenetreJeu, "informations", "Mouvement impossible");	-- Non visible
+							ChangerTexte(fenetreJeu, "titre en jeu", "Mouvement impossible");
+							delay(1.0);
 						end if;
 
-						exit when coordPiece = "A8" or Gueri(V); --faire une vraie sortie
+					exit when Gueri(V); --faire une vraie sortie
 					end loop;
-				CacherFenetre(fenetrejeu);
+					CacherFenetre(fenetrejeu);
 
 		end if;
 
 
 	-- Affichage de fin
-
-
+		CreerFenetreGagne(FenetreGagne,niveau);
+		MontrerFenetre(FenetreGagne);
+		if AttendreBouton(fenetreGagne) = "back_menu" then
+		CacherFenetre(FenetreGagne);
+		end if;
 end avgraphique;

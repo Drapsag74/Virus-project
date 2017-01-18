@@ -162,7 +162,7 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 	nomCase : String(1..2);
 begin
 
-	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 1000);
+	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 800);
 
 		--Background
 		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 1000);
@@ -220,6 +220,10 @@ begin
 
 		--Création de la zone de texte informative
 		AjouterTexte(fenetreJeu, "informations", "Initialisation ...", 0, 150, 150, 25);
+
+		--Création des boutons quitter et fin
+		AjouterBouton(fenetreJeu, "quitter", "", 0, 200, 50, 50);
+
 end CreerFenetreJeu;
 
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) is
@@ -291,5 +295,28 @@ begin
 	end loop;
 
 end MiseAJourGrille;
+
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer) is
+--{} => {Créé la fenêtre d'un niveau réussis}
+
+	message : string(1..19);
+begin
+	if niveau < 10 then
+		message := "Niveau "&image(niveau)(2)&" Reussis ! ";
+	else
+		message := "Niveau "&image(niveau)(2..3)&"Reussis !";
+	end if;
+	fenetreGagne := DebutFenetre("Anti-Virus : Niveau réussis !", 1000, 700);
+	-- titre choix du niveau
+	AjouterTexte(fenetreGagne, "titreGagne", "Choix du niveau", 400, 75, 300,50);
+	ChangerCouleurTexte(fenetreGagne,"titreGagne", FL_TOMATO);
+	ChangerTailleTexte(fenetreGagne, "titreGagne", FL_LARGE_SIZE);
+	ChangerStyleTexte(fenetreGagne, "titreGagne",FL_BOLD_STYLE);
+	AjouterTexte(fenetreGagne, "MessageGagne", message,350,350,300,50);
+	ChangerCouleurTexte(fenetreGagne,"MessageGagne ", FL_CHARTREUSE);
+	ChangerTailleTexte(fenetreGagne, "MessageGagne", FL_HUGE_SIZE);
+	ChangerStyleTexte(fenetreGagne, "MessageGagne",FL_FIXEDBOLDITALIC_STYLE);
+	AjouterBouton(fenetreGagne, "back_menu", "Revenir au menu", 100,650, 200, 50);
+end CreerFenetreGagne;
 
 end p_graphique;
