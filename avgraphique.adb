@@ -18,16 +18,17 @@ procedure avgraphique is
 
 	f : file_type;
 	V : TV_Virus;
-	direction : string(1..2);
+	nomBouton : string(1..255) := (others => ' ');
 	piece : integer;
-	coordPiece : string(1..2);
 begin
 
-	InitialiserFenetres;
 	-- Création des Fenêtres
+		InitialiserFenetres;
+	
 		CreerFenetreBienvenue(FenetreBienvenue);
 		CreerFenetreDifficulte(FenetreDifficulte);
-
+		
+		--Fenetre choix de niveau
 		CreerFenetreStarter(fenetreStarter);
 		CreerFenetreJunior(fenetreJunior);
 		CreerFenetreExpert(fenetreExpert);
@@ -37,6 +38,7 @@ begin
 		CreerFenetreJeu(fenetreJeu);
 
 	--Programme principal
+
 		--Page d'accueil
 		MontrerFenetre(fenetreBienvenue);
 		if AttendreBouton(fenetreBienvenue) = "start" then
@@ -70,61 +72,65 @@ begin
 				CacherFenetre(fenetreWizard);
 			end if;
 
-			--Jeu
+			--Préparation du jeu
+
 				-- Récupération des données de la partie
 				Open(f, in_file, "Parties");
 				CreeVectVirus (f, niveau, V);
 				Close(f);
 
-				-- Initialisation
+				-- Initialisation 
 				MontrerFenetre(fenetreJeu);
 				MiseAJourGrille(fenetreJeu, V);
 
-				-- Jeu
+			-- Jeu
+			while not Gueri(V) loop
 
-					loop
-						--Eventuellement, désactiver le plateau lorsque choix direction et inversement
+				-- Initialisation du tour de jeu
+				ChangerTexte(fenetreJeu, "infoAction", "  Choisissez votre piece");
+				ChangerTexte(fenetreJeu, "infoMouvement", ""); 
 
+				-- Attente d'un bouton
+				declare				
+					nomBouton : String := AttendreBouton(fenetreJeu);
+				begin
 
-						-- Sélection de la piece
-						ChangerTexte(fenetreJeu, "informations", "Choisissez votre piece");					
-						coordPiece := AttendreBouton(fenetreJeu);
-						if coordPiece = "quitter" then exit; end if;
-						piece := T_Piece'pos(V(character'pos(coordPiece(2))-48,coordPiece(1))); 
+					if nomBouton = "quitter" then exit;
+
+					-- Si choix de direction ...
+					elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
+
+						-- ... Effectuer mouvement
+						if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then					
+							Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
+							MiseAJourGrille(fenetreJeu, V);
+						else
+							ChangerTexte(fenetreJeu, "infoMouvement", "Mouvement impossible"); 
+						end if;
+
+					else -- Sélection de la piece
+									
+						piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1))); 
 									-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
 									-- I et J sont extrait du nom du bouton. 
 									-- Le numéro de ligne est un chiffre sous forme de charactère. 
 									-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
 									-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
+						ChangerTexte(fenetreJeu, "infoAction", "Choisissez votre direction");	
 
-
-						-- Sélection de la direction
-						ChangerTexte(fenetreJeu, "informations", "Choisissez votre direction");	
-						direction := AttendreBouton(fenetreJeu);
-						if coordPiece = "quitter" then exit; end if;
-						
-
-						-- Mouvement
-						if possible(V, T_Piece'val(piece), T_Direction'value(direction)) then
-							Deplacement(V, T_Piece'val(piece), T_Direction'value(direction));
-
-							MiseAJourGrille(fenetreJeu, V);
-						else
-							ChangerTexte(fenetreJeu, "titre en jeu", "Mouvement impossible");
-							delay(1.0);
-						end if;
-
-					exit when Gueri(V); --faire une vraie sortie
-					end loop;
-					CacherFenetre(fenetrejeu);
+					end if;
+				end;
+			end loop;
+			CacherFenetre(fenetrejeu);
 
 		end if;
 
 
-	-- Affichage de fin
+		-- Affichage de fin
 		CreerFenetreGagne(FenetreGagne,niveau);
 		MontrerFenetre(FenetreGagne);
 		if AttendreBouton(fenetreGagne) = "back_menu" then
-		CacherFenetre(FenetreGagne);
+			CacherFenetre(FenetreGagne);
 		end if;
+
 end avgraphique;

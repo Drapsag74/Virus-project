@@ -38,11 +38,10 @@ begin
 	while Val.couleur /= Rouge and not end_of_file(f) loop
 		V(Val.ligne, Val.colonne) := Val.Couleur;	 		
 		Read(F,Val);
-	end loop;
-	while Val.Couleur = Rouge and not end_of_file(f) loop	 
-		V(Val.ligne, Val.colonne) := rouge;		
-		Read(F,Val);
-	end loop;
+	end loop;	 
+	V(Val.ligne, Val.colonne) := rouge;		
+	Read(F,Val);
+	V(Val.ligne, Val.colonne) := rouge;
 end CreeVectVirus;
 
    

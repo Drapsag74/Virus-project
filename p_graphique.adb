@@ -36,27 +36,33 @@ begin
 			ChangerCouleurTexte(fenetreDifficulte,"titreDifficulte", FL_TOMATO);
 			ChangerTailleTexte(fenetreDifficulte, "titreDifficulte", FL_LARGE_SIZE);
 			ChangerStyleTexte(fenetreDifficulte, "titreDifficulte",FL_FIXEDBOLDITALIC_STYLE);
-			-- Boutons
-			AjouterBouton(fenetreDifficulte,"starter","Starter",200,150,100,50);
-			ChangerCouleurTexte(fenetreDifficulte,"starter", FL_CHARTREUSE);
-			ChangerTailleTexte(fenetreDifficulte, "starter", FL_MEDIUM_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "starter",FL_BOLD_STYLE);
-			AjouterBouton(fenetreDifficulte,"junior","Junior",200,225,100,50);
-			ChangerCouleurTexte(fenetreDifficulte,"junior", FL_CHARTREUSE);
-			ChangerTailleTexte(fenetreDifficulte, "junior", FL_MEDIUM_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "junior",FL_BOLD_STYLE);
-			AjouterBouton(fenetreDifficulte,"expert","Expert",200,300,100,50);
-			ChangerCouleurTexte(fenetreDifficulte,"expert", FL_CHARTREUSE);
-			ChangerTailleTexte(fenetreDifficulte, "expert", FL_MEDIUM_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "expert",FL_BOLD_STYLE);
-			AjouterBouton(fenetreDifficulte,"master","Master",200,375,100,50);
-			ChangerCouleurTexte(fenetreDifficulte,"master", FL_CHARTREUSE);
-			ChangerTailleTexte(fenetreDifficulte, "master", FL_MEDIUM_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "master",FL_BOLD_STYLE);
-			AjouterBouton(fenetreDifficulte,"wizard","Wizard",200,450,100,50);
-			ChangerCouleurTexte(fenetreDifficulte,"wizard", FL_CHARTREUSE);
-			ChangerTailleTexte(fenetreDifficulte, "wizard", FL_MEDIUM_SIZE);
-			ChangerStyleTexte(fenetreDifficulte, "wizard",FL_BOLD_STYLE);
+			
+			-- Boutons Difficulte
+				--Starter
+				AjouterBouton(fenetreDifficulte,"starter","Starter",200,150,100,50);
+				ChangerCouleurTexte(fenetreDifficulte,"starter", FL_CHARTREUSE);
+				ChangerTailleTexte(fenetreDifficulte, "starter", FL_MEDIUM_SIZE);
+				ChangerStyleTexte(fenetreDifficulte, "starter",FL_BOLD_STYLE);
+				--Junior
+				AjouterBouton(fenetreDifficulte,"junior","Junior",200,225,100,50);
+				ChangerCouleurTexte(fenetreDifficulte,"junior", FL_CHARTREUSE);
+				ChangerTailleTexte(fenetreDifficulte, "junior", FL_MEDIUM_SIZE);
+				ChangerStyleTexte(fenetreDifficulte, "junior",FL_BOLD_STYLE);
+				--Expert
+				AjouterBouton(fenetreDifficulte,"expert","Expert",200,300,100,50);
+				ChangerCouleurTexte(fenetreDifficulte,"expert", FL_CHARTREUSE);
+				ChangerTailleTexte(fenetreDifficulte, "expert", FL_MEDIUM_SIZE);
+				ChangerStyleTexte(fenetreDifficulte, "expert",FL_BOLD_STYLE);
+				--Master
+				AjouterBouton(fenetreDifficulte,"master","Master",200,375,100,50);
+				ChangerCouleurTexte(fenetreDifficulte,"master", FL_CHARTREUSE);
+				ChangerTailleTexte(fenetreDifficulte, "master", FL_MEDIUM_SIZE);
+				ChangerStyleTexte(fenetreDifficulte, "master",FL_BOLD_STYLE);
+				--Wizard
+				AjouterBouton(fenetreDifficulte,"wizard","Wizard",200,450,100,50);
+				ChangerCouleurTexte(fenetreDifficulte,"wizard", FL_CHARTREUSE);
+				ChangerTailleTexte(fenetreDifficulte, "wizard", FL_MEDIUM_SIZE);
+				ChangerStyleTexte(fenetreDifficulte, "wizard",FL_BOLD_STYLE);
 
 		FinFenetre(fenetreDifficulte);
 end CreerFenetreDifficulte;
@@ -162,10 +168,10 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 	nomCase : String(1..2);
 begin
 
-	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 800);
+	fenetreJeu:= DebutFenetre("Anti-Virus", 1000, 750);
 
 		--Background
-		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 1000);
+		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 800);
 		ChangerImageBouton(fenetreJeu, "background", "img/background.xpm");
 		ChangerEtatBouton(fenetreJeu, "background", arret);
 
@@ -182,13 +188,13 @@ begin
 
 			-- Affichage des lignes paires
 			if ligne mod 2 = 0 then
-				x := 250;
+				x := 230;
 				colonne := Character'val(Character'pos(colonne) + 1);
 
 				while colonne < T_Col'last  loop
 					nomCase := colonne & T_Lig'image(ligne)(2);
-					AjouterBouton(fenetreJeu, nomCase , "", x, y, 100, 100);
-					x := x + 200;
+					AjouterBoutonRond(fenetreJeu, nomCase , "", x, y, 100, 100);
+					x := x + 140;
 					colonne := Character'val(Character'pos(colonne) + 2);
 				end loop;
 
@@ -198,31 +204,32 @@ begin
 
 				while colonne <= T_Col'last loop
 					nomCase := colonne & T_Lig'image(ligne)(2);
-					AjouterBouton(fenetreJeu, nomCase, "", x, y, 100, 100);
-					x := x + 200;
+					AjouterBoutonRond(fenetreJeu, nomCase, "", x, y, 100, 100);
+					x := x + 140;
 					colonne := Character'val(Character'pos(colonne) + 2);
 				end loop;
 			end if;
 
-			y := y + 100;
+			y := y + 70;
 			ligne := ligne + 1;
 		end loop;
 
 		--Création des boutons directionnels
-		AjouterBoutonImage(fenetreJeu, "hg", "", 0, 0, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "hg", "", 720, 250, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hg", "img/hg.xpm");
-		AjouterBoutonImage(fenetreJeu, "hd", "", 50, 0, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "hd", "", 775, 250, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hd", "img/hd.xpm");
-		AjouterBoutonImage(fenetreJeu, "bd", "", 50, 50, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "bd", "", 775, 305, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bd", "img/bd.xpm");
-		AjouterBoutonImage(fenetreJeu, "bg", "", 0, 50, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "bg", "", 720, 305, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bg", "img/bg.xpm");
 
-		--Création de la zone de texte informative
-		AjouterTexte(fenetreJeu, "informations", "Initialisation ...", 0, 150, 150, 25);
-
+		--Création des zones de texte informatives
+		AjouterTexte(fenetreJeu, "infoMouvement", "", 700, 375, 200, 25);
+		AjouterTexte(fenetreJeu, "infoAction", "", 700, 400, 200, 25);
+		
 		--Création des boutons quitter et fin
-		AjouterBouton(fenetreJeu, "quitter", "", 0, 200, 50, 50);
+		AjouterBouton(fenetreJeu, "", "Quitter", 700, 450, 100, 25);
 
 end CreerFenetreJeu;
 
@@ -245,7 +252,7 @@ begin
 			while colonne < T_Col'last  loop
 				nomCase := colonne & T_Lig'image(ligne)(2);
 				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
-
+				ChangerEtatBouton(fenetreJeu, nomCase, arret);
 				colonne := Character'val(Character'pos(colonne) + 2);
 			end loop;
 
@@ -255,7 +262,7 @@ begin
 			while colonne <= T_Col'last loop
 				nomCase := colonne & T_Lig'image(ligne)(2);
 				ChangerCouleurFond(fenetreJeu, nomCase, FL_BOTTOM_BCOL);
-
+				ChangerEtatBouton(fenetreJeu, nomCase, arret);
 				colonne := Character'val(Character'pos(colonne) + 2);
 			end loop;
 
@@ -268,6 +275,7 @@ begin
 	for i in T_Lig'range loop
 		for j in T_Col'range loop
 			if V(i,j) /= vide then
+				ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				nomCase := j & T_Lig'image(i)(2);
 				if V(i,j) = rouge then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_RED);
@@ -289,6 +297,7 @@ begin
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_YELLOW);
 				else -- case blanc
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_WHITE);
+					ChangerEtatBouton(fenetreJeu, nomCase, arret);
 				end if;
 			end if;
 		end loop;
