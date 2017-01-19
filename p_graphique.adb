@@ -36,7 +36,7 @@ begin
 			ChangerCouleurTexte(fenetreDifficulte,"titreDifficulte", FL_TOMATO);
 			ChangerTailleTexte(fenetreDifficulte, "titreDifficulte", FL_LARGE_SIZE);
 			ChangerStyleTexte(fenetreDifficulte, "titreDifficulte",FL_FIXEDBOLDITALIC_STYLE);
-			
+
 			-- Boutons Difficulte
 				--Starter
 				AjouterBouton(fenetreDifficulte,"starter","Starter",200,150,100,50);
@@ -206,7 +206,7 @@ begin
 
 	AjouterBouton(fenetreRegles, "fermerRegles", "Fermer", 475, 725, 50, 30);
 	FinFenetre(fenetreRegles);
-		
+
 end CreerFenetreRegles;
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 --{} => {Affichage des règles}
@@ -275,12 +275,16 @@ begin
 		--Création des zones de texte informatives
 		AjouterTexte(fenetreJeu, "info1", "", 700, 375, 175, 25);
 		AjouterTexte(fenetreJeu, "info2", "", 700, 400, 175, 24);
-		
+
 		--Création du bouton quitter
-		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 450, 90, 25);
+		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 550, 90, 25);
 
 		--Création du bouton règles
-		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 450, 90, 25);
+		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 550, 90, 25);
+
+		--Création du bouton de Jeanne
+		AjouterBoutonImage(fenetreJeu, "jeanne", "", 700, 450, 171, 100);
+		ChangerImageBouton(fenetreJeu, "jeanne", "img/jeanne.xpm");
 
 	FinFenetre(FenetreJeu);
 
@@ -413,7 +417,7 @@ procedure finJeu(fenetreJeu : in out TR_Fenetre) is
 	colonne : character;
 	nomCase : string(1..2);
 begin
-	
+
 	-- Désactiver les boutons de pieces
 	while ligne <= T_Lig'last loop
 		colonne := T_Col'first;
@@ -440,14 +444,14 @@ begin
 		end if;
 
 		ligne := ligne + 1;
-	end loop;	
-		
+	end loop;
+
 	-- Désactiver les boutons de direction
 	ChangerEtatBouton(fenetreJeu, "hg", arret);
 	ChangerEtatBouton(fenetreJeu, "hd", arret);
 	ChangerEtatBouton(fenetreJeu, "bg", arret);
 	ChangerEtatBouton(fenetreJeu, "bd", arret);
-	
+
 	-- Désactiver Jeanne
 	ChangerEtatBouton(fenetreJeu, "Jeanne", arret);
 

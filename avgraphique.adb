@@ -6,6 +6,7 @@ use p_virus.p_Piece_IO;
 use p_virus.p_Direction_IO;
 with Forms; use Forms;
 with ada.calendar; use ada.calendar;
+with Jeanne; use Jeanne;
 
 
 procedure avgraphique is
@@ -41,7 +42,7 @@ begin
 	CreerFenetreBienvenue(FenetreBienvenue);
 	MontrerFenetre(fenetreBienvenue);
 	if AttendreBouton(fenetreBienvenue) = "start" then
-		CacherFenetre(fenetreBienvenue);	
+		CacherFenetre(fenetreBienvenue);
 	end if;
 
 	loop
@@ -61,11 +62,11 @@ begin
 				begin
 					CacherFenetre(fenetreStarter);
 					if choix /= "retour" then
-						niveau := integer'value(choix);		
+						niveau := integer'value(choix);
 						exit;
 					end if;
 				end;
-		
+
 			elsif difficulte = junior then
 				CreerFenetreJunior(fenetreJunior);
 				MontrerFenetre(fenetreJunior);
@@ -75,7 +76,7 @@ begin
 					CacherFenetre(fenetreJunior);
 					if choix /= "retour" then
 						niveau := integer'value(choix);
-						exit;	
+						exit;
 					end if;
 				end;
 
@@ -128,12 +129,14 @@ begin
 			CreeVectVirus (f, niveau, V);
 			Close(f);
 
-			-- Initialisation 
+			-- Initialisation
 			CreerFenetreJeu(fenetreJeu);
 			MontrerFenetre(fenetreJeu);
 			MiseAJourGrille(fenetreJeu, V);
 			HeureDebut := clock;
 			nbCoups := 0;
+			Jeanne.initialisation;
+			Jeanne.enregistre(V);
 
 		-- Jeu
 
@@ -141,7 +144,7 @@ begin
 		while not Gueri(V) loop
 
 			-- Attente d'un bouton
-			declare				
+			declare
 				nomBouton : String := AttendreBouton(fenetreJeu);
 			begin
 
@@ -154,14 +157,21 @@ begin
 						CacherFenetre(fenetreRegles);
 					end if;
 
+				elsif nomBouton = "jeanne" then
+					Jeanne.cherche(V, niveau);
+					nbCoups := nbCoups + 1;
+					Jeanne.enregistre(V);
+					MiseAJourGrille(fenetreJeu, V);
+
 				-- Si choix de direction ...
 				elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
 
 					-- ... Effectuer mouvement
-					if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then					
+					if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then
 						Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
 						MiseAJourGrille(fenetreJeu, V);
 						nbCoups := nbCoups + 1;
+						Jeanne.enregistre(V);
 						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
 						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
 					else
@@ -171,19 +181,20 @@ begin
 					end if;
 
 				else -- Sélection de la piece
-					piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1))); 
-								-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
-								-- I et J sont extrait du nom du bouton. 
-								-- Le numéro de ligne est un chiffre sous forme de charactère. 
+					piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1)));
+								-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j).
+								-- I et J sont extrait du nom du bouton.
+								-- Le numéro de ligne est un chiffre sous forme de charactère.
 								-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
 								-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
 					ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
-					ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");		
+					ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
 
 				end if;
 			end;
 		end loop;
 		CacherFenetre(fenetrejeu);
+		Jeanne.apprend(niveau, nbCoups);
 
 		-- Affichage de fin
 
