@@ -2,6 +2,7 @@ with p_esiut; use p_esiut;
 with p_virus; use p_virus;
 with p_fenbase; use p_fenbase;
 with Forms; use Forms;
+with Ada.calendar; use Ada.calendar;
 
 package p_graphique is
 
@@ -34,10 +35,17 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre);
 procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre);
 --{} => {Affichage des règles}
 
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in Natural);
+--{} => {Créé la fenêtre d'un niveau réussis}
+
+procedure CreerFenetreAbandon(FenetreAbandon : in out TR_Fenetre);
+--{} => {Créé la fenêtre d'abadon}
+
+
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);
 --{} => {Met à jour l'affichage des cases de la grille}
 
-procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer);
---{} => {Créé la fenêtre d'un niveau réussis}
+procedure finJeu(fenetreJeu : in out TR_Fenetre);
+-- {} => {désactive tous les boutons sauf le bouton quitter}
 
 end p_graphique;

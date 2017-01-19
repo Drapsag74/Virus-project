@@ -286,6 +286,46 @@ begin
 
 end CreerFenetreJeu;
 
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in Natural) is
+--{} => {Créé la fenêtre d'un niveau réussis}
+
+	message : string(1..18);
+
+begin
+	if niveau < 10 then
+		message := "Niveau "&image(niveau)(2)&" Reussi ! ";
+	else
+		message := "Niveau "&image(niveau)(2..3)&"Reussi !";
+	end if;
+
+	fenetreGagne := DebutFenetre("Anti-Virus : Niveau réussis!", 500, 300);
+		-- titre choix du niveau
+		AjouterTexte(fenetreGagne, "titreGagne", "Niveau Reussi !", 100, 50, 300,50);
+		ChangerCouleurTexte(fenetreGagne,"titreGagne", FL_TOMATO);
+		ChangerTailleTexte(fenetreGagne, "titreGagne", FL_LARGE_SIZE);
+		ChangerStyleTexte(fenetreGagne, "titreGagne",FL_BOLD_STYLE);
+		AjouterTexte(fenetreGagne, "MessageGagne", message,100,50,300,50);
+		AjouterTexte(fenetreGagne, "Score", "Votre score est de "&image(Score), 100,200, 300, 50);
+		AjouterBouton(fenetreGagne, "rejouer", "Revenir au menu", 50,270, 225, 50);
+		AjouterBouton(fenetreGagne, "quitter", "Quitter", 325, 270, 225, 50);
+	FinFenetre(FenetreGagne);
+
+end CreerFenetreGagne;
+
+procedure CreerFenetreAbandon(FenetreAbandon : in out TR_Fenetre) is
+--{} => {Créé la fenêtre d'abadon}
+
+begin
+	fenetreAbandon := DebutFenetre("Anti-Virus : lache !", 500, 300);
+		AjouterTexte(fenetreAbandon, "Abandontxt", "Pour quoi nous quittes tu si tot ?", 150, 50, 250, 100);
+		ChangerStyleTexte(fenetreAbandon, "Abandontxt",FL_BOLD_STYLE);
+		AjouterBouton(fenetreAbandon, "quitter", "Je suis faible et j'abandonne",0,250, 250, 50 );
+		AjouterBouton(fenetreAbandon, "rejouer", "Je prend ma vie a 2 mains et je rejoue",250 ,250,250,50);
+	FinFenetre(FenetreAbandon);
+
+
+end CreerFenetreAbandon;
+
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus) is
 --{} => {Met à jour l'affichage des cases de la grille}
 
@@ -328,29 +368,39 @@ begin
 	for i in T_Lig'range loop
 		for j in T_Col'range loop
 			if V(i,j) /= vide then
-				ChangerEtatBouton(fenetreJeu, nomCase, marche);
+				-- On ne peu pas mettre les boutons en etat marche ici, bug bibliotheque ?
 				nomCase := j & T_Lig'image(i)(2);
 				if V(i,j) = rouge then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_RED);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = turquoise then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKCYAN);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = orange then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKORANGE);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = rose then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_ORCHID);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = marron then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKTOMATO);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = bleu then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_CYAN);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = violet then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_DARKVIOLET);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = vert then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_CHARTREUSE);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				elsif V(i,j) = jaune then
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_YELLOW);
+					ChangerEtatBouton(fenetreJeu, nomCase, marche);
 				else -- case blanc
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_WHITE);
 					ChangerEtatBouton(fenetreJeu, nomCase, arret);
+					Ecrire_ligne(nomcase);
 				end if;
 			end if;
 		end loop;
@@ -358,27 +408,50 @@ begin
 
 end MiseAJourGrille;
 
-procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer) is
---{} => {Créé la fenêtre d'un niveau réussis}
-
-	message : string(1..19);
+procedure finJeu(fenetreJeu : in out TR_Fenetre) is
+-- {} => {désactive tous les boutons sauf le bouton quitter}
+	ligne : integer := T_Lig'first;
+	colonne : character;
+	nomCase : string(1..2);
 begin
-	if niveau < 10 then
-		message := "Niveau "&image(niveau)(2)&" Reussis ! ";
-	else
-		message := "Niveau "&image(niveau)(2..3)&"Reussis !";
-	end if;
-	fenetreGagne := DebutFenetre("Anti-Virus : Niveau réussis !", 1000, 700);
-	-- titre choix du niveau
-	AjouterTexte(fenetreGagne, "titreGagne", "Choix du niveau", 400, 75, 300,50);
-	ChangerCouleurTexte(fenetreGagne,"titreGagne", FL_TOMATO);
-	ChangerTailleTexte(fenetreGagne, "titreGagne", FL_LARGE_SIZE);
-	ChangerStyleTexte(fenetreGagne, "titreGagne",FL_BOLD_STYLE);
-	AjouterTexte(fenetreGagne, "MessageGagne", message,350,350,300,50);
-	ChangerCouleurTexte(fenetreGagne,"MessageGagne ", FL_CHARTREUSE);
-	ChangerTailleTexte(fenetreGagne, "MessageGagne", FL_HUGE_SIZE);
-	ChangerStyleTexte(fenetreGagne, "MessageGagne",FL_FIXEDBOLDITALIC_STYLE);
-	AjouterBouton(fenetreGagne, "back_menu", "Revenir au menu", 100,650, 200, 50);
-end CreerFenetreGagne;
+	
+	-- Désactiver les boutons de pieces
+	while ligne <= T_Lig'last loop
+		colonne := T_Col'first;
+
+		-- Désactivation des boutons des lignes paires
+		if ligne mod 2 = 0 then
+
+			colonne := Character'val(Character'pos(colonne) + 1);
+			while colonne < T_Col'last  loop
+				nomCase := colonne & T_Lig'image(ligne)(2);
+				ChangerEtatBouton(fenetreJeu, nomCase, arret);
+				colonne := Character'val(Character'pos(colonne) + 2);
+			end loop;
+
+		-- Désactivation des boutons des lignes impaires
+		else
+
+			while colonne <= T_Col'last loop
+				nomCase := colonne & T_Lig'image(ligne)(2);
+				ChangerEtatBouton(fenetreJeu, nomCase, arret);
+				colonne := Character'val(Character'pos(colonne) + 2);
+			end loop;
+
+		end if;
+
+		ligne := ligne + 1;
+	end loop;	
+		
+	-- Désactiver les boutons de direction
+	ChangerEtatBouton(fenetreJeu, "hg", arret);
+	ChangerEtatBouton(fenetreJeu, "hd", arret);
+	ChangerEtatBouton(fenetreJeu, "bg", arret);
+	ChangerEtatBouton(fenetreJeu, "bd", arret);
+	
+	-- Désactiver Jeanne
+	ChangerEtatBouton(fenetreJeu, "Jeanne", arret);
+
+end finJeu;
 
 end p_graphique;
