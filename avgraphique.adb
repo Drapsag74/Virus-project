@@ -33,197 +33,183 @@ procedure avgraphique is
 
 begin
 
-	-- Création des Fenêtres
-		InitialiserFenetres;
-	
-		CreerFenetreBienvenue(FenetreBienvenue);
-		CreerFenetreDifficulte(FenetreDifficulte);
-		
-		--Fenetre choix de niveau
-		CreerFenetreStarter(fenetreStarter);
-		CreerFenetreJunior(fenetreJunior);
-		CreerFenetreExpert(fenetreExpert);
-		CreerFenetreMaster(fenetreMaster);
-		CreerFenetreWizard(fenetreWizard);
+	InitialiserFenetres;
 
-		CreerFenetreJeu(fenetreJeu);
-		CreerFenetreRegles(fenetreRegles);
 
-		CreerFenetreGagne(FenetreGagne,niveau, score);
-		CreerFenetreAbandon(fenetreAbandon);
+	--Page d'accueil
+	CreerFenetreBienvenue(FenetreBienvenue);
+	MontrerFenetre(fenetreBienvenue);
+	if AttendreBouton(fenetreBienvenue) = "start" then
+		CacherFenetre(fenetreBienvenue);	
+	end if;
 
-	--Programme principal
-
-		--Page d'accueil
-		MontrerFenetre(fenetreBienvenue);
-		if AttendreBouton(fenetreBienvenue) = "start" then
-			CacherFenetre(fenetreBienvenue);	
-		end if;
-
+	loop
 		loop
-			loop
-				--Choix difficulté
-				MontrerFenetre(fenetreDifficulte);
-				difficulte := T_Difficulte'value(AttendreBouton(fenetreDifficulte));
-				CacherFenetre(fenetreDifficulte);
+			--Choix difficulté
+			CreerFenetreDifficulte(FenetreDifficulte);
+			MontrerFenetre(fenetreDifficulte);
+			difficulte := T_Difficulte'value(AttendreBouton(fenetreDifficulte));
+			CacherFenetre(fenetreDifficulte);
 
-				--Choix du niveau
-				---------------------------------------------------------------------------------------- BERK DES IF DEGUELASSES
-				if difficulte = starter then
-					MontrerFenetre(fenetreStarter);
-					declare
-						choix : String := AttendreBouton(fenetreStarter);
-					begin
-						if choix = "retour" then
-							CacherFenetre(fenetreStarter);
-						else
-							niveau := integer'value(choix);
-							CacherFenetre(fenetreStarter);
-							exit;
-						end if;
-					end;
-		
-				elsif difficulte = junior then
-					MontrerFenetre(fenetreJunior);
-					declare
-						choix : String := AttendreBouton(fenetreJunior);
-					begin
-						if choix = "retour" then
-							CacherFenetre(fenetreJunior);
-							exit;
-						else
-							niveau := integer'value(choix);
-							CacherFenetre(fenetreJunior);
-						end if;
-					end;
-
-				elsif difficulte = expert then
-					MontrerFenetre(fenetreExpert);
-					declare
-						choix : String := AttendreBouton(fenetreExpert);
-					begin
-						if choix = "retour" then
-							CacherFenetre(fenetreExpert);
-							exit;
-						else
-							niveau := integer'value(choix);
-							CacherFenetre(fenetreExpert);
-						end if;
-					end;
-
-				elsif difficulte = master then
-					MontrerFenetre(fenetreMaster);
-					declare
-						choix : String := AttendreBouton(fenetreMaster);
-					begin
-						if choix = "retour" then
-							CacherFenetre(fenetreMaster);
-							exit;
-						else
-							niveau := integer'value(choix);
-							CacherFenetre(fenetreMaster);
-						end if;
-					end;
-
-				else --lvl wizard
-					MontrerFenetre(fenetreWizard);
-					declare
-						choix : String := AttendreBouton(fenetreWizard);
-					begin
-						if choix = "retour" then
-							CacherFenetre(fenetreWizard);
-							exit;
-						else
-							niveau := integer'value(choix);
-							CacherFenetre(fenetreWizard);
-						end if;
-					end;
-
-				end if;
-			end loop;
-
-			--Préparation du jeu
-
-				-- Récupération des données de la partie
-				Open(f, in_file, "Parties");
-				CreeVectVirus (f, niveau, V);
-				Close(f);
-
-				-- Initialisation 
-				MontrerFenetre(fenetreJeu);
-				MiseAJourGrille(fenetreJeu, V);
-				HeureDebut := clock;
-
-			-- Jeu
-
-			ChangerTexte(fenetreJeu, "info1", "  Choisissez votre piece");
-			while not Gueri(V) loop
-
-				-- Attente d'un bouton
-				declare				
-					nomBouton : String := AttendreBouton(fenetreJeu);
+			--Choix du niveau
+			if difficulte = starter then
+				CreerFenetreStarter(fenetreStarter);
+				MontrerFenetre(fenetreStarter);
+				declare
+					choix : String := AttendreBouton(fenetreStarter);
 				begin
-
-					if nomBouton = "quitter" then exit;
-
-					elsif nomBouton = "regles" then
-						MontrerFenetre(fenetreRegles);
-						if AttendreBouton(fenetreRegles) = "fermerRegles" then
-							CacherFenetre(fenetreRegles);
-						end if;
-
-					-- Si choix de direction ...
-					elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
-
-						-- ... Effectuer mouvement
-						if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then					
-							Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
-							MiseAJourGrille(fenetreJeu, V);
-							ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
-							ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
-						else
-							ChangerTexte(fenetreJeu, "info1", "  Mouvement impossible");
-							ChangerTexte(fenetreJeu, "info2", "Change de piece/direction");
-						end if;
-
-					else -- Sélection de la piece
-						piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1))); 
-									-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
-									-- I et J sont extrait du nom du bouton. 
-									-- Le numéro de ligne est un chiffre sous forme de charactère. 
-									-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
-									-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
-						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
-						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");		
-
+					CacherFenetre(fenetreStarter);
+					if choix /= "retour" then
+						niveau := integer'value(choix);		
+						exit;
 					end if;
 				end;
-			end loop;
-			CacherFenetre(fenetrejeu);
+		
+			elsif difficulte = junior then
+				CreerFenetreJunior(fenetreJunior);
+				MontrerFenetre(fenetreJunior);
+				declare
+					choix : String := AttendreBouton(fenetreJunior);
+				begin
+					CacherFenetre(fenetreJunior);
+					if choix /= "retour" then
+						niveau := integer'value(choix);
+						exit;	
+					end if;
+				end;
 
-			-- Affichage de fin
+			elsif difficulte = expert then
+				CreerFenetreExpert(fenetreExpert);
+				MontrerFenetre(fenetreExpert);
+				declare
+					choix : String := AttendreBouton(fenetreExpert);
+				begin
+					CacherFenetre(fenetreExpert);
+					if choix /= "retour" then
+						niveau := integer'value(choix);
+						exit;
+					end if;
+				end;
 
-			if Gueri(V) then
-				heureFin := clock;
-				score := nbCoups / natural(heureFin- heureDebut);
-				MontrerFenetre(FenetreGagne);
-				if AttendreBouton(fenetreGagne) = "rejouer" then
-					CacherFenetre(FenetreGagne);
-				else -- Il veut quitter
-					CacherFenetre(FenetreGagne);
-					exit;
+			elsif difficulte = master then
+				CreerFenetreMaster(fenetreMaster);
+				MontrerFenetre(fenetreMaster);
+				declare
+					choix : String := AttendreBouton(fenetreMaster);
+				begin
+					CacherFenetre(fenetreMaster);
+					if choix /= "retour" then
+						niveau := integer'value(choix);
+						exit;
+					end if;
+				end;
+
+			else --lvl wizard
+				CreerFenetreWizard(fenetreWizard);
+				MontrerFenetre(fenetreWizard);
+				declare
+					choix : String := AttendreBouton(fenetreWizard);
+				begin
+					CacherFenetre(fenetreWizard);
+					if choix /= "retour" then
+						niveau := integer'value(choix);
+						exit;
+					end if;
+				end;
+
+			end if;
+		end loop;
+
+		--Préparation du jeu
+
+			-- Récupération des données de la partie
+			Open(f, in_file, "Parties");
+			CreeVectVirus (f, niveau, V);
+			Close(f);
+
+			-- Initialisation 
+			CreerFenetreJeu(fenetreJeu);
+			MontrerFenetre(fenetreJeu);
+			MiseAJourGrille(fenetreJeu, V);
+			HeureDebut := clock;
+			nbCoups := 0;
+
+		-- Jeu
+
+		ChangerTexte(fenetreJeu, "info1", "  Choisissez votre piece");
+		while not Gueri(V) loop
+
+			-- Attente d'un bouton
+			declare				
+				nomBouton : String := AttendreBouton(fenetreJeu);
+			begin
+
+				if nomBouton = "quitter" then exit;
+
+				elsif nomBouton = "regles" then
+					CreerFenetreRegles(fenetreRegles);
+					MontrerFenetre(fenetreRegles);
+					if AttendreBouton(fenetreRegles) = "fermerRegles" then
+						CacherFenetre(fenetreRegles);
+					end if;
+
+				-- Si choix de direction ...
+				elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
+
+					-- ... Effectuer mouvement
+					if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then					
+						Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
+						MiseAJourGrille(fenetreJeu, V);
+						nbCoups := nbCoups + 1;
+						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
+						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
+					else
+						ChangerTexte(fenetreJeu, "info1", "  Mouvement impossible");
+						ChangerTexte(fenetreJeu, "info2", "Change de piece/direction");
+					end if;
+
+				else -- Sélection de la piece
+					piece := T_Piece'pos(V(character'pos(nomBouton(2))-48,nomBouton(1))); 
+								-- La piece doit être la position de la couleur qu'il y a dans la case V(i,j). 
+								-- I et J sont extrait du nom du bouton. 
+								-- Le numéro de ligne est un chiffre sous forme de charactère. 
+								-- integer'image(i) ne fonctionne pas car i est un est un charcter et non un string !
+								-- Il faut donc aller chercher la position du caractère i et lui retirer 48 car les chiffres en ASCII sont codés à partir de 48
+					ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
+					ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");		
+
 				end if;
+			end;
+		end loop;
+		CacherFenetre(fenetrejeu);
 
-			else --Il a abandonné
-				MontrerFenetre(fenetreAbandon);
-				if AttendreBouton(fenetreAbandon) = "rejouer" then
-					CacherFenetre(FenetreAbandon);
-				else -- Il veut quitter
-					CacherFenetre(FenetreAbandon);
-					exit;
-				end if;
+		-- Affichage de fin
+
+		if Gueri(V) then
+			heureFin := clock;
+			score := 1 /(nbCoups * natural(heureFin- heureDebut));
+			Ecrire_ligne(nbCoups);
+			Ecrire_ligne(natural(heureFin - heureDebut));
+			CreerFenetreGagne(FenetreGagne, niveau, score);
+			MontrerFenetre(FenetreGagne);
+			if AttendreBouton(fenetreGagne) = "rejouer" then
+				CacherFenetre(FenetreGagne);
+			else -- Il veut quitter
+				CacherFenetre(FenetreGagne);
+				exit;
 			end if;
 
-		end loop;
+		else --Il a abandonné
+			CreerFenetreAbandon(fenetreAbandon);
+			MontrerFenetre(fenetreAbandon);
+			if AttendreBouton(fenetreAbandon) = "rejouer" then
+				CacherFenetre(FenetreAbandon);
+			else -- Il veut quitter
+				CacherFenetre(FenetreAbandon);
+				exit;
+			end if;
+		end if;
+
+	end loop;
 
 end avgraphique;

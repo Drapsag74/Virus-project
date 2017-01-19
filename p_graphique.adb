@@ -400,7 +400,6 @@ begin
 				else -- case blanc
 					ChangerCouleurFond(fenetreJeu, nomCase, FL_WHITE);
 					ChangerEtatBouton(fenetreJeu, nomCase, arret);
-					Ecrire_ligne(nomcase);
 				end if;
 			end if;
 		end loop;
