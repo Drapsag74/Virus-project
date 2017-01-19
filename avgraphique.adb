@@ -29,6 +29,7 @@ procedure avgraphique is
 	-- Variables pour le score
 	HeureDebut, HeureFin : Time;
 	nbCoups : natural := 0;
+	nbErreurs : natural := 0;
 	score : integer;
 
 begin
@@ -164,6 +165,7 @@ begin
 						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
 						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
 					else
+						nbErreurs := nbErreurs + 1;
 						ChangerTexte(fenetreJeu, "info1", "  Mouvement impossible");
 						ChangerTexte(fenetreJeu, "info2", "Change de piece/direction");
 					end if;
@@ -187,9 +189,7 @@ begin
 
 		if Gueri(V) then
 			heureFin := clock;
-			score := 1 /(nbCoups * natural(heureFin- heureDebut));
-			Ecrire_ligne(nbCoups);
-			Ecrire_ligne(natural(heureFin - heureDebut));
+			score := 1000 - nbCoups * 10 - nbErreurs * 50 - natural(heureFin - heureDebut);
 			CreerFenetreGagne(FenetreGagne, niveau, score);
 			MontrerFenetre(FenetreGagne);
 			if AttendreBouton(fenetreGagne) = "rejouer" then
