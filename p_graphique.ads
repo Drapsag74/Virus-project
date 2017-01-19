@@ -31,7 +31,7 @@ procedure CreerFenetreWizard(fenetreWizard : out TR_Fenetre);
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre);
 --{} => {Affichage du plateau de jeu}
 
---procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre) is
+procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre);
 --{} => {Affichage des règles}
 
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);

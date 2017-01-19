@@ -181,15 +181,25 @@ begin
 end CreerFenetreWizard;
 
 
---procedure CreerFenetreRegles(FenetreJeu : out TR_Fenetre) is
+procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre) is
 --{} => {Affichage du plateau de jeu}
---begin
+begin
 
-	--fenetreRegles := DebutFenetre("Anti-Virus : Regles", 1000, 750);
-		--AjouterTexte(fenetreRegles, "titreRegle", "Regles", "0", "0");
-	--FinFenetre(fenetreRegles);
+	fenetreRegles := DebutFenetre("Anti-Virus : Regles", 1000, 750);
+	AjouterTexte(fenetreRegles, "titreRegle",
+		     "“Le jeu comporte 9 pièces de couleur: la pièce rouge (le virus à éliminer)” &NewLine & “ainsi que 8 pièces mobilesde couleurs différentes (turquoise,” & Newline &”orange, rose, marron, bleu, violet, vert et jaune). Les pièces sont de” & Newline& “taille et de formes différentes. Elles occupent 2 ou 3 cases lorqu’elles” & Newline &“sont présentes sur la grille.”
+
+“ll existe également 2 petites pièces blanches qui occupent chacune une case et”&NewLine & “qui ne peuvent pas être déplacées au cours de la partie. Elles” &NewLine&“gênent donc les pièces de couleur dans leurs déplacements sur la grille.”
+
+“Les pièces de couleur se déplacent une par une en diagonale (elles ne peuvent” &NewLine&“pas se déplacer horizontalement ni verticalement, ni pivoter). Il y a donc 4” &NewLine&“directions possibles: bas/gauche, haut/gauche, bas/droite et haut/droite. Pour”&NewLine& “que le déplacement soit possible, il faut que les cases de destination existent et” &NewLine&“soient libres”
+
+“Le début d’une partie est donné par une configuration initiale qui indique” &Newline&“quelles pièces sont utilisées et comment elles sont placées. Le virus“ Newline&“(pièce rouge) est bien sûr toujours présentet occupe toujours 2 cases. “ Newline&”Une configuration comporte 0, 1 ou 2 pièces blanches fixes. “ Newline&”Le but est de déplacer les pièces afin de permettre au virusde sortir” Newline&“par le coin situé en haut à gauche.
+",
+		     0, 0, 100, 25);
+		AjouterBouton(fenetreRegles, "fermerRegles", "Fermer", 10, 10, 20, 20);
+	FinFenetre(fenetreRegles);
 		
---end CreerFenetreRegles;
+end CreerFenetreRegles;
 
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 --{} => {Affichage des règles}
@@ -199,7 +209,7 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 	nomCase : String(1..2);
 begin
 
-	fenetreRegles := DebutFenetre("Anti-Virus", 1000, 750);
+	fenetreJeu := DebutFenetre("Anti-Virus", 1000, 750);
 
 		--Background
 		AjouterBoutonImage(fenetreJeu, "background", "", 0, 0, 1000, 800);
