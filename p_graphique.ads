@@ -8,6 +8,13 @@ package p_graphique is
 
 type T_Difficulte is (starter, junior, expert, master, wizard);
 
+package p_PieceIO is new p_enum(T_Piece); use p_PieceIO;
+
+type Mouvement is record
+    Piece : T_Piece;
+    Direction : T_Direction;
+end record;
+
 procedure CreerFenetreBienvenue(FenetreBienvenue : out TR_Fenetre);
 --{} => {Créer la fenêtre de bienvenue}
 
@@ -41,9 +48,11 @@ procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; 
 procedure CreerFenetreAbandon(FenetreAbandon : in out TR_Fenetre);
 --{} => {Créé la fenêtre d'abadon}
 
-
 procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);
 --{} => {Met à jour l'affichage des cases de la grille}
+
+function InverserMouvement(mv : in T_Direction) return T_Direction;
+--{String(1..2)} => {Retourne l'inverse du mouvement donné}
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre);
 -- {} => {désactive tous les boutons sauf le bouton quitter}

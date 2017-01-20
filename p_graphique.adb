@@ -76,21 +76,23 @@ procedure CreerFenetreStarter(fenetreStarter : out TR_Fenetre) is
 begin
 	fenetreStarter := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
 		--titre choix du niveau
-		AjouterTexte(fenetreStarter, "titreStarter", "Choix du niveau", 400, 75, 300,50);
+		AjouterTexte(fenetreStarter, "titreStarter", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreStarter,"titreStarter", FL_TOMATO);
 		ChangerTailleTexte(fenetreStarter, "titreStarter", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreStarter, "titreStarter",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBoutonImage(fenetreStarter, "1", "Niveau 1", 100 ,200,200,200);
+		AjouterBoutonImage(fenetreStarter, "1", "Niveau 1", 100 ,100,200,200);
 		ChangerImageBouton(fenetreStarter, "1", "img/niveaux/niveau1.xpm");
-		AjouterBoutonImage(fenetreStarter, "2", "Niveau 2", 400,200,200,200);
+		AjouterBoutonImage(fenetreStarter, "2", "Niveau 2", 400,100,200,200);
 		ChangerImageBouton(fenetreStarter, "2", "img/niveaux/niveau2.xpm");
-		AjouterBoutonImage(fenetreStarter, "3", "Niveau 3", 700,200,200,200);
+		AjouterBoutonImage(fenetreStarter, "3", "Niveau 3", 700,100,200,200);
 		ChangerImageBouton(fenetreStarter, "3", "img/niveaux/niveau3.xpm");
-		AjouterBoutonImage(fenetreStarter, "4", "Niveau 4", 250,450,200,200);
+		AjouterBoutonImage(fenetreStarter, "4", "Niveau 4", 250,350,200,200);
 		ChangerImageBouton(fenetreStarter, "4", "img/niveaux/niveau4.xpm");
-		AjouterBoutonImage(fenetreStarter, "5", "Niveau 5", 550,450,200,200);
+		AjouterBoutonImage(fenetreStarter, "5", "Niveau 5", 550,350,200,200);
 		ChangerImageBouton(fenetreStarter, "5", "img/niveaux/niveau5.xpm");
+		--bouton retour
+		AjouterBouton(fenetreStarter, "retour", "Retour", 450, 640, 100, 50);
 	FinFenetre(fenetreStarter);
 end CreerFenetreStarter;
 
@@ -100,21 +102,23 @@ procedure CreerFenetreJunior(fenetreJunior : out TR_Fenetre) is
 begin
    fenetreJunior := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
 		--titre choix du niveau
-		AjouterTexte(fenetreJunior, "titreJunior", "Choix du niveau", 400, 75, 300,50);
+		AjouterTexte(fenetreJunior, "titreJunior", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreJunior,"titreJunior", FL_TOMATO);
 		ChangerTailleTexte(fenetreJunior, "titreJunior", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJunior, "titreJunior",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBoutonImage(fenetreJunior, "6", "Niveau 6", 100 ,200,200,200);
+		AjouterBoutonImage(fenetreJunior, "6", "Niveau 6", 100 ,100,200,200);
 		ChangerImageBouton(fenetreJunior, "6", "img/niveaux/niveau6.xpm");
-		AjouterBoutonImage(fenetreJunior, "7", "Niveau 7", 400,200,200,200);
+		AjouterBoutonImage(fenetreJunior, "7", "Niveau 7", 400,100,200,200);
 		ChangerImageBouton(fenetreJunior, "7", "img/niveaux/niveau7.xpm");
-		AjouterBoutonImage(fenetreJunior, "8", "Niveau 8", 700,200,200,200);
+		AjouterBoutonImage(fenetreJunior, "8", "Niveau 8", 700,100,200,200);
 		ChangerImageBouton(fenetreJunior, "8", "img/niveaux/niveau8.xpm");
-		AjouterBoutonImage(fenetreJunior, "9", "Niveau 9", 250,450,200,200);
+		AjouterBoutonImage(fenetreJunior, "9", "Niveau 9", 250,350,200,200);
 		ChangerImageBouton(fenetreJunior, "9", "img/niveaux/niveau9.xpm");
-		AjouterBoutonImage(fenetreJunior, "10", "Niveau 10", 550,450,200,200);
+		AjouterBoutonImage(fenetreJunior, "10", "Niveau 10", 550,350,200,200);
 		ChangerImageBouton(fenetreJunior, "10", "img/niveaux/niveau10.xpm");
+		--bouton retour
+		AjouterBouton(fenetreJunior, "retour", "Retour", 450, 640, 100, 50);
 	FinFenetre(fenetreJunior);
 end CreerFenetreJunior;
 
@@ -124,21 +128,23 @@ procedure CreerFenetreExpert(fenetreExpert : out TR_Fenetre) is
 begin
    fenetreExpert := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
 		--titre choix du niveau
-		AjouterTexte(fenetreExpert, "titreExpert", "Choix du niveau", 400, 75, 300,50);
+		AjouterTexte(fenetreExpert, "titreExpert", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreExpert,"titreExpert", FL_TOMATO);
 		ChangerTailleTexte(fenetreExpert, "titreExpert", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreExpert, "titreExpert",FL_BOLD_STYLE);
 		--bouton de choix de niveau
-		AjouterBoutonImage(fenetreExpert, "11", "Niveau 11", 100,200,200,200);
+		AjouterBoutonImage(fenetreExpert, "11", "Niveau 11", 100,100,200,200);
 		ChangerImageBouton(fenetreExpert, "11", "img/niveaux/niveau11.xpm");
-		AjouterBoutonImage(fenetreExpert, "12", "Niveau 12", 400,200,200,200);
+		AjouterBoutonImage(fenetreExpert, "12", "Niveau 12", 400,100,200,200);
 		ChangerImageBouton(fenetreExpert, "12", "img/niveaux/niveau12.xpm");
-		AjouterBoutonImage(fenetreExpert, "13", "Niveau 13", 700,200,200,200);
+		AjouterBoutonImage(fenetreExpert, "13", "Niveau 13", 700,100,200,200);
 		ChangerImageBouton(fenetreExpert, "13", "img/niveaux/niveau13.xpm");
-		AjouterBoutonImage(fenetreExpert, "14", "Niveau 14", 250,450,200,200);
+		AjouterBoutonImage(fenetreExpert, "14", "Niveau 14", 250,350,200,200);
 		ChangerImageBouton(fenetreExpert, "14", "img/niveaux/niveau14.xpm");
-		AjouterBoutonImage(fenetreExpert, "15", "Niveau 15", 550,450,200,200);
+		AjouterBoutonImage(fenetreExpert, "15", "Niveau 15", 550,350,200,200);
 		ChangerImageBouton(fenetreExpert, "15", "img/niveaux/niveau15.xpm");
+		--bouton retour
+		AjouterBouton(fenetreExpert, "retour", "Retour", 450, 640, 100, 50);
 	FinFenetre(fenetreExpert);
 end CreerFenetreExpert;
 
@@ -148,17 +154,19 @@ procedure CreerFenetreMaster(fenetreMaster : out TR_Fenetre) is
 begin
 	fenetreMaster := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
 		-- titre choix du niveau
-		AjouterTexte(fenetreMaster, "titreMaster", "Choix du niveau", 400, 75, 300,50);
+		AjouterTexte(fenetreMaster, "titreMaster", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreMaster,"titreMaster", FL_TOMATO);
 		ChangerTailleTexte(fenetreMaster, "titreMaster", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreMaster, "titreMaster",FL_BOLD_STYLE);
 		-- bouton de choix de niveau
-		AjouterBoutonImage(fenetreMaster, "16", "Niveau 16", 250,200,200,200);
+		AjouterBoutonImage(fenetreMaster, "16", "Niveau 16", 250,100,200,200);
 		ChangerImageBouton(fenetreMaster, "16", "img/niveaux/niveau16.xpm");
-		AjouterBoutonImage(fenetreMaster, "17", "Niveau 17", 550,200,200,200);
+		AjouterBoutonImage(fenetreMaster, "17", "Niveau 17", 550,100,200,200);
 		ChangerImageBouton(fenetreMaster, "17", "img/niveaux/niveau17.xpm");
-		AjouterBoutonImage(fenetreMaster, "18", "Niveau 18", 400,450,200,200);
+		AjouterBoutonImage(fenetreMaster, "18", "Niveau 18", 400,350,200,200);
 		ChangerImageBouton(fenetreMaster, "18", "img/niveaux/niveau18.xpm");
+		--bouton retour
+		AjouterBouton(fenetreMaster, "retour", "Retour", 450, 640, 100, 50);
 	FinFenetre(fenetreMaster);
 end CreerFenetreMaster;
 
@@ -168,15 +176,17 @@ procedure CreerFenetreWizard(fenetreWizard : out TR_Fenetre) is
 begin
 	fenetreWizard := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
 		--titre choix du niveau
-		AjouterTexte(fenetreWizard, "titreWizard", "Choix du niveau", 400, 75, 300,50);
+		AjouterTexte(fenetreWizard, "titreWizard", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreWizard,"titreWizard", FL_TOMATO);
 		ChangerTailleTexte(fenetreWizard, "titreWizard", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreWizard, "titreWizard",FL_BOLD_STYLE);
 		-- bouton de choix de niveau
-		AjouterBoutonImage(fenetreWizard, "19", "Niveau 19",250 ,250,200,200);
+		AjouterBoutonImage(fenetreWizard, "19", "Niveau 19",250 ,150,200,200);
 		ChangerImageBouton(fenetreWizard, "19", "img/niveaux/niveau19.xpm");
-		AjouterBoutonImage(fenetreWizard, "20", "Niveau 20", 550,250,200,200);
+		AjouterBoutonImage(fenetreWizard, "20", "Niveau 20", 550,150,200,200);
 		ChangerImageBouton(fenetreWizard, "20", "img/niveaux/niveau20.xpm");
+		--bouton retour
+		AjouterBouton(fenetreWizard, "retour", "Retour", 450, 640, 100, 50);
 	FinFenetre(fenetreWizard);
 end CreerFenetreWizard;
 
@@ -265,26 +275,30 @@ begin
 		--Création des boutons directionnels
 		AjouterBoutonImage(fenetreJeu, "hg", "", 720, 250, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hg", "img/hg.xpm");
-		AjouterBoutonImage(fenetreJeu, "hd", "", 775, 250, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "hd", "", 774, 250, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hd", "img/hd.xpm");
-		AjouterBoutonImage(fenetreJeu, "bd", "", 775, 305, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "bd", "", 774, 305, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bd", "img/bd.xpm");
 		AjouterBoutonImage(fenetreJeu, "bg", "", 720, 305, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bg", "img/bg.xpm");
 
 		--Création des zones de texte informatives
-		AjouterTexte(fenetreJeu, "info1", "", 700, 375, 175, 25);
-		AjouterTexte(fenetreJeu, "info2", "", 700, 400, 175, 24);
+		AjouterTexte(fenetreJeu, "info1", "", 700, 425, 175, 25);
+		AjouterTexte(fenetreJeu, "info2", "", 700, 450, 175, 24);
 
 		--Création du bouton quitter
-		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 550, 90, 25);
+		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 600, 90, 25);
 
 		--Création du bouton règles
-		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 550, 90, 25);
+		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 600, 90, 25);
 
 		--Création du bouton de Jeanne
-		AjouterBoutonImage(fenetreJeu, "jeanne", "", 700, 450, 171, 100);
+		AjouterBoutonImage(fenetreJeu, "jeanne", "", 700, 500, 171, 100);
 		ChangerImageBouton(fenetreJeu, "jeanne", "img/jeanne.xpm");
+
+		--Création du bouton rollback
+		AjouterBoutonImage(fenetreJeu, "rollback", "", 747, 359, 50, 50);
+		ChangerImageBouton(fenetreJeu, "rollback", "img/rollback.xpm");
 
 	FinFenetre(FenetreJeu);
 
@@ -410,6 +424,16 @@ begin
 	end loop;
 
 end MiseAJourGrille;
+
+function InverserMouvement(mv : in T_Direction) return T_Direction is
+--{String(1..2)} => {Retourne l'inverse du mouvement donné}
+begin
+	if mv = hg then return bd;
+	elsif mv = hd then return bg;
+	elsif mv = bg then return hd;
+	else return hg;
+	end if;
+end InverserMouvement;
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre) is
 -- {} => {désactive tous les boutons sauf le bouton quitter}

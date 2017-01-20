@@ -4,6 +4,7 @@ with p_fenbase; use p_fenbase;
 with p_graphique; use p_graphique;
 use p_virus.p_Piece_IO;
 use p_virus.p_Direction_IO;
+use p_graphique.p_PieceIO;
 with Forms; use Forms;
 with ada.calendar; use ada.calendar;
 with Jeanne; use Jeanne;
@@ -19,13 +20,12 @@ procedure avgraphique is
 	niveau : integer;
 	difficulte : T_Difficulte;
 
-	package p_PieceIO is new p_enum(T_Piece); use p_PieceIO;
-
 	-- Variable du jeu
 	f : file_type;
 	V : TV_Virus;
 	nomBouton : string(1..255) := (others => ' ');
 	piece : integer;
+	DernierMouvement : Mouvement;
 
 	-- Variables pour le score
 	HeureDebut, HeureFin : Time;
@@ -36,7 +36,6 @@ procedure avgraphique is
 begin
 
 	InitialiserFenetres;
-
 
 	--Page d'accueil
 	CreerFenetreBienvenue(FenetreBienvenue);
@@ -163,12 +162,21 @@ begin
 					Jeanne.enregistre(V);
 					MiseAJourGrille(fenetreJeu, V);
 
+				elsif nomBouton = "rollback" then
+					Deplacement(V, DernierMouvement.Piece, InverserMouvement(DernierMouvement.Direction));
+					MiseAJourGrille(fenetreJeu, V);
+					nbCoups := nbCoups + 1;
+					Jeanne.enregistre(V);
+					ChangerTexte(fenetreJeu, "info1", "       Retour en arriere");
+					ChangerTexte(fenetreJeu, "info2", "           effectué !");
+
 				-- Si choix de direction ...
 				elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
 
 					-- ... Effectuer mouvement
 					if possible(V, T_Piece'val(piece), T_Direction'value(nomBouton)) then
 						Deplacement(V, T_Piece'val(piece), T_Direction'value(nomBouton));
+						DernierMouvement := (T_Piece'val(piece), T_Direction'value(nomBouton));
 						MiseAJourGrille(fenetreJeu, V);
 						nbCoups := nbCoups + 1;
 						Jeanne.enregistre(V);
