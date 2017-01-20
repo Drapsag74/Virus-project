@@ -76,11 +76,16 @@ procedure CreerFenetreStarter(fenetreStarter : out TR_Fenetre) is
 
 begin
 	fenetreStarter := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
+		--background
+		AjouterBouton(fenetreStarter, "backgroundStarter", "", 0, 0, 1000, 800);
+		ChangerEtatBouton(fenetreStarter, "backgroundStarter", arret);
+		ChangerCouleurFond(fenetreStarter, "backgroundStarter", FL_LEFT_BCOL);
 		--titre choix du niveau
 		AjouterTexte(fenetreStarter, "titreStarter", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreStarter,"titreStarter", FL_TOMATO);
 		ChangerTailleTexte(fenetreStarter, "titreStarter", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreStarter, "titreStarter",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreStarter, "titreStarter", FL_LEFT_BCOL);
 		--bouton de choix de niveau
 		AjouterBoutonImage(fenetreStarter, "1", "Niveau 1", 100 ,100,200,200);
 		ChangerImageBouton(fenetreStarter, "1", "img/niveaux/niveau1.xpm");
@@ -102,11 +107,16 @@ procedure CreerFenetreJunior(fenetreJunior : out TR_Fenetre) is
 
 begin
    fenetreJunior := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
+	   --background
+	   AjouterBouton(fenetreJunior, "backgroundJunior", "", 0, 0, 1000, 800);
+	   ChangerEtatBouton(fenetreJunior, "backgroundJunior", arret);
+	   ChangerCouleurFond(fenetreJunior, "backgroundJunior", FL_LEFT_BCOL);
 		--titre choix du niveau
 		AjouterTexte(fenetreJunior, "titreJunior", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreJunior,"titreJunior", FL_TOMATO);
 		ChangerTailleTexte(fenetreJunior, "titreJunior", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJunior, "titreJunior",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreJunior, "titreJunior", FL_LEFT_BCOL);
 		--bouton de choix de niveau
 		AjouterBoutonImage(fenetreJunior, "6", "Niveau 6", 100 ,100,200,200);
 		ChangerImageBouton(fenetreJunior, "6", "img/niveaux/niveau6.xpm");
@@ -128,11 +138,16 @@ procedure CreerFenetreExpert(fenetreExpert : out TR_Fenetre) is
 
 begin
    fenetreExpert := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
+		--background
+		AjouterBouton(fenetreExpert, "fenetreExpert", "", 0, 0, 1000, 800);
+		ChangerEtatBouton(fenetreExpert, "fenetreExpert", arret);
+		ChangerCouleurFond(fenetreExpert, "fenetreExpert", FL_LEFT_BCOL);
 		--titre choix du niveau
 		AjouterTexte(fenetreExpert, "titreExpert", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreExpert,"titreExpert", FL_TOMATO);
 		ChangerTailleTexte(fenetreExpert, "titreExpert", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreExpert, "titreExpert",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreExpert, "titreExpert", FL_LEFT_BCOL);
 		--bouton de choix de niveau
 		AjouterBoutonImage(fenetreExpert, "11", "Niveau 11", 100,100,200,200);
 		ChangerImageBouton(fenetreExpert, "11", "img/niveaux/niveau11.xpm");
@@ -154,11 +169,16 @@ procedure CreerFenetreMaster(fenetreMaster : out TR_Fenetre) is
 
 begin
 	fenetreMaster := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
+		--background
+		AjouterBouton(fenetreMaster, "fenetreMaster", "", 0, 0, 1000, 800);
+		ChangerEtatBouton(fenetreMaster, "fenetreMaster", arret);
+		ChangerCouleurFond(fenetreMaster, "fenetreMaster", FL_LEFT_BCOL);
 		-- titre choix du niveau
 		AjouterTexte(fenetreMaster, "titreMaster", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreMaster,"titreMaster", FL_TOMATO);
 		ChangerTailleTexte(fenetreMaster, "titreMaster", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreMaster, "titreMaster",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreMaster, "titreMaster", FL_LEFT_BCOL);
 		-- bouton de choix de niveau
 		AjouterBoutonImage(fenetreMaster, "16", "Niveau 16", 250,100,200,200);
 		ChangerImageBouton(fenetreMaster, "16", "img/niveaux/niveau16.xpm");
@@ -176,11 +196,16 @@ procedure CreerFenetreWizard(fenetreWizard : out TR_Fenetre) is
 
 begin
 	fenetreWizard := DebutFenetre("Anti-Virus : Choix du niveau", 1000, 700);
+		--background
+		AjouterBouton(fenetreWizard, "fenetreWizard", "", 0, 0, 1000, 800);
+		ChangerEtatBouton(fenetreWizard, "fenetreWizard", arret);
+		ChangerCouleurFond(fenetreWizard, "fenetreWizard", FL_LEFT_BCOL);
 		--titre choix du niveau
 		AjouterTexte(fenetreWizard, "titreWizard", "Choix du niveau", 400, 30, 300,50);
 		ChangerCouleurTexte(fenetreWizard,"titreWizard", FL_TOMATO);
 		ChangerTailleTexte(fenetreWizard, "titreWizard", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreWizard, "titreWizard",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreWizard, "titreWizard", FL_LEFT_BCOL);
 		-- bouton de choix de niveau
 		AjouterBoutonImage(fenetreWizard, "19", "Niveau 19",250 ,150,200,200);
 		ChangerImageBouton(fenetreWizard, "19", "img/niveaux/niveau19.xpm");
@@ -324,25 +349,18 @@ end CreerFenetreJeu;
 procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in Natural) is
 --{} => {Créé la fenêtre d'un niveau réussis}
 
-	message : string(1..18);
-
 begin
-	if niveau < 10 then
-		message := "Niveau "&image(niveau)(2)&" Reussi ! ";
-	else
-		message := "Niveau "&image(niveau)(2..3)&"Reussi !";
-	end if;
 
-	fenetreGagne := DebutFenetre("Anti-Virus : Niveau réussis!", 500, 300);
+	fenetreGagne := DebutFenetre("Anti-Virus : Niveau reussis!", 305, 125);
 		-- titre choix du niveau
-		AjouterTexte(fenetreGagne, "titreGagne", "Niveau Reussi !", 100, 50, 300,50);
+		AjouterTexte(fenetreGagne, "titreGagne", "Niveau Reussi !", 103, 10, 100,25);
 		ChangerCouleurTexte(fenetreGagne,"titreGagne", FL_TOMATO);
 		ChangerTailleTexte(fenetreGagne, "titreGagne", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreGagne, "titreGagne",FL_BOLD_STYLE);
-		AjouterTexte(fenetreGagne, "MessageGagne", message,100,50,300,50);
-		AjouterTexte(fenetreGagne, "Score", "Votre score est de "&image(Score), 100,200, 300, 50);
-		AjouterBouton(fenetreGagne, "rejouer", "Revenir au menu", 50,270, 225, 50);
-		AjouterBouton(fenetreGagne, "quitter", "Quitter", 325, 270, 225, 50);
+		AjouterTexte(fenetreGagne, "MessageGagne", "Niveau"&integer'image(niveau)&" reussi ! " ,98,50,125,25);
+		AjouterTexte(fenetreGagne, "Score", "Votre score est de"&image(Score), 80, 75, 200, 25);
+		AjouterBouton(fenetreGagne, "rejouer", "Revenir au menu", 25, 120, 125, 30);
+		AjouterBouton(fenetreGagne, "quitter", "Quitter", 155, 120, 125, 30);
 	FinFenetre(FenetreGagne);
 
 end CreerFenetreGagne;
