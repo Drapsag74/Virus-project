@@ -14,7 +14,7 @@ procedure avgraphique is
 --{} => {Affichage graphique du jeu}
 
 	-- Fenêtres
-	FenetreBienvenue, fenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu, fenetreGagne, fenetreRegles, fenetreAbandon: TR_Fenetre;
+	FenetreBienvenue, fenetreDifficulte, fenetreStarter,  fenetreJunior, fenetreExpert, fenetreMaster,fenetreWizard, fenetreJeu, fenetrePseudo, fenetreGagne, fenetreRegles, fenetreAbandon: TR_Fenetre;
 
 	-- Choix niveau / difficulte
 	niveau : integer;
@@ -26,6 +26,7 @@ procedure avgraphique is
 	nomBouton : string(1..255) := (others => ' ');
 	piece : integer;
 	DernierMouvement : Mouvement;
+	fermer : boolean := false;
 
 	-- Variables pour le score
 	HeureDebut, HeureFin : Time;
@@ -149,7 +150,7 @@ begin
 
 				--Calcul et affichage du score à chaque action
 				score := 1000 - nbCoups * 10 - nbErreurs * 50 - natural(clock - heureDebut);
-				ChangerTexte(fenetreJeu, "score", "       Score : "&integer'image(score));
+				ChangerTexte(fenetreJeu, "score", "       score : "&integer'image(score));
 
 				if nomBouton = "quitter" then exit;
 
@@ -206,20 +207,35 @@ begin
 		end loop;
 		CacherFenetre(fenetrejeu);
 		Jeanne.apprend(niveau, nbCoups);
+		finJeu(fenetreJeu);
 
 		-- Affichage de fin
 
 		if Gueri(V) then
 			heureFin := clock;
 			score := 1000 - nbCoups * 10 - nbErreurs * 50 - natural(heureFin - heureDebut);
-			CreerFenetreGagne(FenetreGagne, niveau, score);
-			MontrerFenetre(FenetreGagne);
-			if AttendreBouton(fenetreGagne) = "rejouer" then
-				CacherFenetre(FenetreGagne);
-			else -- Il veut quitter
-				CacherFenetre(FenetreGagne);
-				exit;
-			end if;
+			CreerFenetrePseudo(fenetrePseudo);
+			MontrerFenetre(fenetrePseudo);
+			loop
+				if AttendreBouton(fenetrePseudo) = "champPseudo" then
+					declare
+						pseudo : String := ConsulterContenu(fenetrePseudo, "champPseudo");
+					begin
+						AjouterScore(score, Pseudo, niveau);
+						CacherFenetre(fenetrePseudo);
+						CreerFenetreGagne(FenetreGagne, niveau, score);
+						MontrerFenetre(FenetreGagne);
+						if AttendreBouton(fenetreGagne) = "rejouer" then
+							CacherFenetre(FenetreGagne);
+						else -- Il veut quitter
+							CacherFenetre(FenetreGagne);
+							fermer := true;
+						end if;
+					end;
+					exit;
+				end if;
+			end loop;
+
 
 		else --Il a abandonné
 			CreerFenetreAbandon(fenetreAbandon);
@@ -232,6 +248,7 @@ begin
 			end if;
 		end if;
 
+	exit when fermer;
 	end loop;
 
 end avgraphique;

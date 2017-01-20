@@ -1,6 +1,5 @@
 with sequential_IO;
 with p_virus; use p_virus;
-with p_esiut; use p_esiut; --juste pour debug
 
 package Jeanne is
 

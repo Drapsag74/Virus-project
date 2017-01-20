@@ -42,7 +42,10 @@ procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre);
 procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre);
 --{} => {Affichage des règles}
 
-procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in Natural);
+procedure CreerFenetrePseudo(fenetrePseudo : out TR_Fenetre);
+--{} => {Crée la fenêtre demandant le pseudo du joueur quand il a gagné pour enregistrer son score}
+
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in integer);
 --{} => {Créé la fenêtre d'un niveau réussis}
 
 procedure CreerFenetreAbandon(FenetreAbandon : in out TR_Fenetre);
@@ -53,6 +56,9 @@ procedure MiseAJourGrille(FenetreJeu : in out TR_Fenetre; V : in out TV_Virus);
 
 function InverserMouvement(mv : in T_Direction) return T_Direction;
 --{String(1..2)} => {Retourne l'inverse du mouvement donné}
+
+procedure AjouterScore(score : in integer; pseudo : in String; niveau : in natural);
+--{} => {Ajoute au fichier du niveau niveau le score score du pseudo pseudo}
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre);
 -- {} => {désactive tous les boutons sauf le bouton quitter}

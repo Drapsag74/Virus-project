@@ -222,28 +222,15 @@ procedure CreerFenetreRegles(FenetreRegles : out TR_Fenetre) is
 begin
 
 	fenetreRegles := DebutFenetre("Anti-Virus : Regles", 1000, 750);
-	AjouterTexte(fenetreRegles, "Regle1", "Le jeu comporte 9 pièces de couleur: la pièce rouge (le virus à éliminer)",100, 10, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle2", "ainsi que 8 pièces mobiles de couleurs différentes (turquoise," ,100, 40, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle3", "orange, rose, marron, bleu, violet, vert et jaune). Les pièces sont de",100, 70, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle4", "taille et de formes différentes. Elles occupent 2 ou 3 cases lorqu’elles",100, 100, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle5", "sont présentes sur la grille. ll existe également 2 petites pièces blanches qui occupent chacune une case et",100, 130, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle6", "qui ne peuvent pas être déplacées au cours de la partie. Elles",100, 160, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle7", "gênent donc les pièces de couleur dans leurs déplacements sur la grille. Les pièces de couleur se déplacent une par une en diagonale (elles ne peuvent",100, 190, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle8", "pas se déplacer horizontalement ni verticalement, ni pivoter). Il y a donc 4",100, 220, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle9", "directions possibles: bas/gauche, haut/gauche, bas/droite et haut/droite. Pour",100, 250, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle10", "que le déplacement soit possible, il faut que les cases de destination existent et",100, 280, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle11", "soient libres Le début d’une partie est donné par une configuration initiale qui indique",100, 310, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle12", "quelles pièces sont utilisées et comment elles sont placées. Le virus",100, 340, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle13", "(pièce rouge) est bien sûr toujours présentet occupe toujours 2 cases." ,100, 370, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle14", "Une configuration comporte 0, 1 ou 2 pièces blanches fixes.",100, 400, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle15", "Le but est de déplacer les pièces afin de permettre au virusde sortir",100, 430, 800, 20);
-	AjouterTexte(fenetreRegles, "Regle16", "par le coin situé en haut à gauche.",100, 460, 800, 20);
-
+	AjouterTexteAscenseur(fenetreRegles, "Regle","","", 250, 50, 500, 650);
+	ChangerContenu(fenetreRegles, "Regle","1. Faites circuler les pieces colories comme indique pour manoeuvrer le virus (la piece rouge) vers la sortie :" & character'val(10) &"-les pieces peuvent uniquement etre glissee en diagonale. VOus ne pouvez pas faire tourner."& character'val(10) &"-si necessaire, vous pouvez deplacer plusieurs pieces en une seule fois."& character'val(10) &"-les pieces blanches sont fixes"& character'val(10) & character'val(10) & "2. Vous avez resolu le puzzle lorsque vous pouvez forcer le virus vers la sortie"& character'val(10) &"et l'expulser du plateau de jeu. Amusez vous bien !" );
 
 	AjouterBouton(fenetreRegles, "fermerRegles", "Fermer", 475, 725, 50, 30);
 	FinFenetre(fenetreRegles);
-
+		
 end CreerFenetreRegles;
+
+
 procedure CreerFenetreJeu(FenetreJeu : out TR_Fenetre) is
 --{} => {Affichage des règles}
 	ligne : integer := T_Lig'first;
@@ -346,7 +333,20 @@ begin
 
 end CreerFenetreJeu;
 
-procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in Natural) is
+procedure CreerFenetrePseudo(fenetrePseudo : out TR_Fenetre) is
+--{} => {Crée la fenêtre demandant le pseudo du joueur quand il a gagné pour enregistrer son score}
+
+begin
+
+	fenetrePseudo := DebutFenetre("Anti-Virus : Pseudo", 300, 100);
+		AjouterTexte(fenetrePseudo, "titrePseudo", "   Quel est votre pseudo ?", 50,20,200,20);
+		AjouterChamp(fenetrePseudo, "champPseudo", "", "", 50, 70, 80, 20);
+		AjouterBouton(fenetrePseudo, "valPseudo", "Valider", 134, 70, 100, 20);
+	FinFenetre(fenetrePseudo);
+
+end CreerFenetrePseudo;
+
+procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in integer) is
 --{} => {Créé la fenêtre d'un niveau réussis}
 
 begin
@@ -469,6 +469,12 @@ begin
 	else return hg;
 	end if;
 end InverserMouvement;
+
+procedure AjouterScore(score : in integer; pseudo : in String; niveau : in natural) is
+--{} => {Ajoute au fichier du niveau niveau le score score du pseudo pseudo}
+begin
+	ecrire("nop");
+end AjouterScore;
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre) is
 -- {} => {désactive tous les boutons sauf le bouton quitter}
