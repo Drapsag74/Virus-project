@@ -3,6 +3,7 @@ with p_virus; use p_virus;
 with p_fenbase; use p_fenbase;
 with Forms; use Forms;
 with Ada.calendar; use Ada.calendar;
+with Text_IO; use Text_IO;
 
 package p_graphique is
 
@@ -59,6 +60,9 @@ function InverserMouvement(mv : in T_Direction) return T_Direction;
 
 procedure AjouterScore(score : in integer; pseudo : in String; niveau : in natural);
 --{} => {Ajoute au fichier du niveau niveau le score score du pseudo pseudo}
+
+procedure MeilleurScore(niveau : in natural; score : out integer; lgPseudo : out integer; pseudo : out String);
+--{} => {Resultat : meilleur score et son pseudo}
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre);
 -- {} => {désactive tous les boutons sauf le bouton quitter}

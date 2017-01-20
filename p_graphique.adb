@@ -22,7 +22,7 @@ begin
 				ChangerTailleTexte(FenetreBienvenue, "créateurs", FL_NORMAL_SIZE);
 				ChangerStyleTexte(FenetreBienvenue, "créateurs",FL_ITALIC_STYLE);
 				--bouton start
-				AjouterBouton(fenetreBienvenue, "start", "Appuyez pour continuer", 170, 450, 160, 50);
+				AjouterBouton(fenetreBienvenue, "start", "Jouer", 170, 450, 160, 50);
 			Finfenetre(fenetreBienvenue);
 end CreerFenetreBienvenue;
 
@@ -348,15 +348,19 @@ end CreerFenetrePseudo;
 
 procedure CreerFenetreGagne(FenetreGagne : out TR_Fenetre; niveau : in Integer; Score : in integer) is
 --{} => {Créé la fenêtre d'un niveau réussis}
-
+	--pseudo : String(1..100);
+	--scoreMeilleurJoueur : integer;
+	--lgPseudo : integer;
 begin
-
+	--pseudo := (others => ' ');
+	--meilleurscore(niveau, scoreMeilleurJoueur, lgPseudo, pseudo);
 	fenetreGagne := DebutFenetre("Anti-Virus : Niveau reussis!", 305, 125);
 		-- titre choix du niveau
 		AjouterTexte(fenetreGagne, "titreGagne", "Niveau Reussi !", 103, 10, 100,25);
 		ChangerCouleurTexte(fenetreGagne,"titreGagne", FL_TOMATO);
 		ChangerTailleTexte(fenetreGagne, "titreGagne", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreGagne, "titreGagne",FL_BOLD_STYLE);
+		--AjouterTexte(fenetreGagne, "meilleur score", "Meilleur score : "&integer'image(Score)&" réalisé par "&pseudo, 0, 10, 305,0);
 		AjouterTexte(fenetreGagne, "MessageGagne", "Niveau"&integer'image(niveau)&" reussi ! " ,98,50,125,25);
 		AjouterTexte(fenetreGagne, "Score", "Votre score est de"&image(Score), 80, 75, 200, 25);
 		AjouterBouton(fenetreGagne, "rejouer", "Revenir au menu", 25, 120, 125, 30);
@@ -369,13 +373,13 @@ procedure CreerFenetreAbandon(FenetreAbandon : in out TR_Fenetre) is
 --{} => {Créé la fenêtre d'abadon}
 
 begin
-	fenetreAbandon := DebutFenetre("Anti-Virus : lache !", 500, 300);
-		AjouterTexte(fenetreAbandon, "Abandontxt", "Pour quoi nous quittes tu si tot ?", 150, 50, 250, 100);
-		ChangerStyleTexte(fenetreAbandon, "Abandontxt",FL_BOLD_STYLE);
-		AjouterBouton(fenetreAbandon, "quitter", "Je suis faible et j'abandonne",0,250, 250, 50 );
-		AjouterBouton(fenetreAbandon, "rejouer", "Je prend ma vie a 2 mains et je rejoue",250 ,250,250,50);
-	FinFenetre(FenetreAbandon);
 
+	fenetreAbandon := DebutFenetre("Anti-Virus : lache !", 600, 300);
+		AjouterTexte(fenetreAbandon, "Abandontxt", "Pourquoi nous quittes tu si tot ?", 200, 50, 250, 100);
+		ChangerStyleTexte(fenetreAbandon, "Abandontxt",FL_BOLD_STYLE);
+		AjouterBouton(fenetreAbandon, "quitter", "Je suis faible et j'abandonne",10,250, 285, 50 );
+		AjouterBouton(fenetreAbandon, "rejouer", "Je prend mon courage a 2 mains et je rejoue",305 ,250,285,50);
+	FinFenetre(FenetreAbandon);
 
 end CreerFenetreAbandon;
 
@@ -472,9 +476,37 @@ end InverserMouvement;
 
 procedure AjouterScore(score : in integer; pseudo : in String; niveau : in natural) is
 --{} => {Ajoute au fichier du niveau niveau le score score du pseudo pseudo}
+	f : Text_IO.file_type;
 begin
-	ecrire("nop");
+	Open(f, append_file, "score/"&integer'image(niveau));
+		put_line(f, pseudo);
+		put_line(f, integer'image(score));
+	Close(f);
 end AjouterScore;
+
+procedure MeilleurScore(niveau : in natural; score : out integer; lgPseudo : out integer; pseudo : out String) is
+--{} => {Resultat : meilleur score et son pseudo}
+	f : Text_IO.file_type;
+	max : integer := 0;
+	pseudoActuel : String(1..100);
+	scoreActuel : String(1..4);
+	lg1, lg2 : integer;
+begin
+	Open(f, in_file, "score/"&integer'image(niveau));
+	
+	while not end_of_file(f) loop
+		get_line(f, pseudoactuel, lg1);
+		get_line(f, scoreactuel, lg2);	
+		if integer'value(scoreActuel) > max then
+			score := integer'value(scoreActuel(1..lg2));
+			pseudo := pseudoActuel;
+			lgPseudo := lg1;
+		end if;
+		
+	end loop;
+	
+	Close(f);
+end MeilleurScore;
 
 procedure finJeu(fenetreJeu : in out TR_Fenetre) is
 -- {} => {désactive tous les boutons sauf le bouton quitter}
@@ -510,7 +542,7 @@ begin
 
 		ligne := ligne + 1;
 	end loop;
-
+	
 	-- Désactiver les boutons de direction
 	ChangerEtatBouton(fenetreJeu, "hg", arret);
 	ChangerEtatBouton(fenetreJeu, "hd", arret);
