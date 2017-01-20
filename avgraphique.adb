@@ -168,11 +168,10 @@ begin
 
 				elsif nomBouton = "rollback" then
 					Deplacement(V, DernierMouvement.Piece, InverserMouvement(DernierMouvement.Direction));
+					DernierMouvement := (DernierMouvement.Piece, InverserMouvement(DernierMouvement.Direction));
 					MiseAJourGrille(fenetreJeu, V);
 					nbCoups := nbCoups + 1;
 					Jeanne.enregistre(V);
-					ChangerTexte(fenetreJeu, "info1", "    Retour en arriere");
-					ChangerTexte(fenetreJeu, "info2", "        effectue !");
 
 				-- Si choix de direction ...
 				elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then

@@ -31,6 +31,7 @@ procedure CreerFenetreDifficulte(FenetreDifficulte : out TR_Fenetre) is
 
 begin
 		fenetreDifficulte := DebutFenetre("Anti-Virus : Choix difficulte", 500, 500);
+
 			-- Titre
 			Ajoutertexte(fenetreDifficulte, "titreDifficulte", "Choix difficulte",125,50,300,100);
 			ChangerCouleurTexte(fenetreDifficulte,"titreDifficulte", FL_TOMATO);
@@ -45,22 +46,22 @@ begin
 				ChangerStyleTexte(fenetreDifficulte, "starter",FL_BOLD_STYLE);
 				--Junior
 				AjouterBouton(fenetreDifficulte,"junior","Junior",200,225,100,50);
-				ChangerCouleurTexte(fenetreDifficulte,"junior", FL_CHARTREUSE);
+				ChangerCouleurTexte(fenetreDifficulte,"junior", FL_PALEGREEN);
 				ChangerTailleTexte(fenetreDifficulte, "junior", FL_MEDIUM_SIZE);
 				ChangerStyleTexte(fenetreDifficulte, "junior",FL_BOLD_STYLE);
 				--Expert
 				AjouterBouton(fenetreDifficulte,"expert","Expert",200,300,100,50);
-				ChangerCouleurTexte(fenetreDifficulte,"expert", FL_CHARTREUSE);
+				ChangerCouleurTexte(fenetreDifficulte,"expert", FL_DARKGOLD);
 				ChangerTailleTexte(fenetreDifficulte, "expert", FL_MEDIUM_SIZE);
 				ChangerStyleTexte(fenetreDifficulte, "expert",FL_BOLD_STYLE);
 				--Master
 				AjouterBouton(fenetreDifficulte,"master","Master",200,375,100,50);
-				ChangerCouleurTexte(fenetreDifficulte,"master", FL_CHARTREUSE);
+				ChangerCouleurTexte(fenetreDifficulte,"master", FL_INDIANRED);
 				ChangerTailleTexte(fenetreDifficulte, "master", FL_MEDIUM_SIZE);
 				ChangerStyleTexte(fenetreDifficulte, "master",FL_BOLD_STYLE);
 				--Wizard
 				AjouterBouton(fenetreDifficulte,"wizard","Wizard",200,450,100,50);
-				ChangerCouleurTexte(fenetreDifficulte,"wizard", FL_CHARTREUSE);
+				ChangerCouleurTexte(fenetreDifficulte,"wizard", FL_RED);
 				ChangerTailleTexte(fenetreDifficulte, "wizard", FL_MEDIUM_SIZE);
 				ChangerStyleTexte(fenetreDifficulte, "wizard",FL_BOLD_STYLE);
 
@@ -238,6 +239,7 @@ begin
 		ChangerCouleurTexte(fenetreJeu,"titre en jeu", FL_TOMATO);
 		ChangerTailleTexte(fenetreJeu, "titre en jeu", FL_LARGE_SIZE);
 		ChangerStyleTexte(fenetreJeu, "titre en jeu",FL_BOLD_STYLE);
+		ChangerCouleurFond(fenetreJeu, "titre en jeu", FL_LEFT_BCOL);
 
 		--Création du plateau de jeu
 		y := 100;
@@ -273,36 +275,47 @@ begin
 		end loop;
 
 		--Création des boutons directionnels
-		AjouterBoutonImage(fenetreJeu, "hg", "", 720, 250, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "hg", "", 730, 235, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hg", "img/hg.xpm");
-		AjouterBoutonImage(fenetreJeu, "hd", "", 774, 250, 50, 50);
+		ChangerCouleurFond(fenetreJeu, "hg", FL_TOP_BCOL);
+		AjouterBoutonImage(fenetreJeu, "hd", "", 784, 235, 50, 50);
 		ChangerImageBouton(fenetreJeu, "hd", "img/hd.xpm");
-		AjouterBoutonImage(fenetreJeu, "bd", "", 774, 305, 50, 50);
+		ChangerCouleurFond(fenetreJeu, "hd", FL_TOP_BCOL);
+		AjouterBoutonImage(fenetreJeu, "bd", "", 784, 290, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bd", "img/bd.xpm");
-		AjouterBoutonImage(fenetreJeu, "bg", "", 720, 305, 50, 50);
+		ChangerCouleurFond(fenetreJeu, "bd", FL_TOP_BCOL);
+		AjouterBoutonImage(fenetreJeu, "bg", "", 730, 290, 50, 50);
 		ChangerImageBouton(fenetreJeu, "bg", "img/bg.xpm");
+		ChangerCouleurFond(fenetreJeu, "bg", FL_TOP_BCOL);
 
 		--Création des zones de texte informatives
 		AjouterTexte(fenetreJeu, "info1", "", 700, 410, 175, 25);
-		AjouterTexte(fenetreJeu, "info2", "", 700, 435, 175, 24);
-		AjouterTexte(fenetreJeu, "score", "       Score : 1000", 700, 460, 175, 24);
+		ChangerCouleurFond(fenetreJeu, "info1", FL_LEFT_BCOL);
+		AjouterTexte(fenetreJeu, "info2", "", 700, 428, 175, 24);
+		ChangerCouleurFond(fenetreJeu, "info2", FL_LEFT_BCOL);
+		AjouterTexte(fenetreJeu, "score", "       Score : 1000", 700, 448, 175, 24);
+		ChangerCouleurFond(fenetreJeu, "score", FL_LEFT_BCOL);
 
 		--Création du bouton quitter
 		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 600, 90, 25);
+		ChangerCouleurFond(fenetreJeu, "quitter", FL_TOP_BCOL);
 
 		--Création du bouton règles
 		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 600, 90, 25);
+		ChangerCouleurFond(fenetreJeu, "regles", FL_TOP_BCOL);
 
 		--Création du bouton de Jeanne
 		AjouterBoutonImage(fenetreJeu, "jeanne", "", 705, 485, 171, 105);
 		ChangerImageBouton(fenetreJeu, "jeanne", "img/jeanne.xpm");
 
 		--Création du bouton rollback
-		AjouterBoutonImage(fenetreJeu, "rollback", "", 747, 359, 50, 50);
+		AjouterBoutonImage(fenetreJeu, "rollback", "", 757, 344, 50, 50);
 		ChangerImageBouton(fenetreJeu, "rollback", "img/rollback.xpm");
+		ChangerCouleurFond(fenetreJeu, "rollback", FL_TOP_BCOL);
 
 		--Création de l'horloge
-		AjouterHorloge(fenetreJeu, "horloge", "", 720, 115, 100, 100);
+		AjouterHorloge(fenetreJeu, "horloge", "", 730, 110, 100, 100);
+		ChangerCouleurFond(fenetreJeu, "horloge", FL_LEFT_BCOL);
 
 	FinFenetre(FenetreJeu);
 
