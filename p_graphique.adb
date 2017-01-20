@@ -283,8 +283,9 @@ begin
 		ChangerImageBouton(fenetreJeu, "bg", "img/bg.xpm");
 
 		--Création des zones de texte informatives
-		AjouterTexte(fenetreJeu, "info1", "", 700, 425, 175, 25);
-		AjouterTexte(fenetreJeu, "info2", "", 700, 450, 175, 24);
+		AjouterTexte(fenetreJeu, "info1", "", 700, 410, 175, 25);
+		AjouterTexte(fenetreJeu, "info2", "", 700, 435, 175, 24);
+		AjouterTexte(fenetreJeu, "score", "       Score : 1000", 700, 460, 175, 24);
 
 		--Création du bouton quitter
 		AjouterBouton(fenetreJeu, "quitter", "Quitter", 700, 600, 90, 25);
@@ -293,12 +294,15 @@ begin
 		AjouterBouton(fenetreJeu, "regles", "Regles", 793, 600, 90, 25);
 
 		--Création du bouton de Jeanne
-		AjouterBoutonImage(fenetreJeu, "jeanne", "", 700, 500, 171, 100);
+		AjouterBoutonImage(fenetreJeu, "jeanne", "", 705, 485, 171, 105);
 		ChangerImageBouton(fenetreJeu, "jeanne", "img/jeanne.xpm");
 
 		--Création du bouton rollback
 		AjouterBoutonImage(fenetreJeu, "rollback", "", 747, 359, 50, 50);
 		ChangerImageBouton(fenetreJeu, "rollback", "img/rollback.xpm");
+
+		--Création de l'horloge
+		AjouterHorloge(fenetreJeu, "horloge", "", 720, 115, 100, 100);
 
 	FinFenetre(FenetreJeu);
 

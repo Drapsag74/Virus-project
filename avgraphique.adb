@@ -147,6 +147,10 @@ begin
 				nomBouton : String := AttendreBouton(fenetreJeu);
 			begin
 
+				--Calcul et affichage du score à chaque action
+				score := 1000 - nbCoups * 10 - nbErreurs * 50 - natural(clock - heureDebut);
+				ChangerTexte(fenetreJeu, "score", "       Score : "&integer'image(score));
+
 				if nomBouton = "quitter" then exit;
 
 				elsif nomBouton = "regles" then
@@ -167,8 +171,8 @@ begin
 					MiseAJourGrille(fenetreJeu, V);
 					nbCoups := nbCoups + 1;
 					Jeanne.enregistre(V);
-					ChangerTexte(fenetreJeu, "info1", "       Retour en arriere");
-					ChangerTexte(fenetreJeu, "info2", "           effectué !");
+					ChangerTexte(fenetreJeu, "info1", "    Retour en arriere");
+					ChangerTexte(fenetreJeu, "info2", "        effectue !");
 
 				-- Si choix de direction ...
 				elsif nomBouton = "hg" or nomBouton = "hd" or nomBouton = "bd" or nomBouton = "bg" then
@@ -180,8 +184,8 @@ begin
 						MiseAJourGrille(fenetreJeu, V);
 						nbCoups := nbCoups + 1;
 						Jeanne.enregistre(V);
-						ChangerTexte(fenetreJeu, "info1", "     Choisis ta direction");
-						ChangerTexte(fenetreJeu, "info2", "      ou une autre piece");
+						ChangerTexte(fenetreJeu, "info1", "   Choisis ta direction");
+						ChangerTexte(fenetreJeu, "info2", "    ou une autre piece");
 					else
 						nbErreurs := nbErreurs + 1;
 						ChangerTexte(fenetreJeu, "info1", "  Mouvement impossible");
